@@ -46,6 +46,16 @@ create table Accesorio(
     primary key PK_codigoAccesorio(codigoAccesorio)
 );
 
+-- Servicios / mantenimientos
+create table Servicio(
+	codigoServicio int not null auto_increment,
+    nombreServicio varchar(250) not null,
+    descripcionServicio varchar(250)not null,
+    precioServicio double(10,2)not null,
+    primary key PK_codigoServicio(codigoServicio)
+);
+
+
 -- ---------------------------------SP EMPLEADOS ------------------------------------
 
 -- Agregar --
@@ -352,3 +362,74 @@ DELIMITER ;
 
 CALL sp_eliminarAccesorio(5);
 
+-- Procedimientos almacenados 
+-- Procedimiento almacenado de Servicio
+-- ----------- Agregar Servicio ------------------
+delimiter //
+create procedure sp_agregarservicio(
+    in nservicio varchar(250),
+    in dservicio varchar(250),
+    in pservicio double
+)
+begin
+    insert into servicio (nombreservicio, descripcionservicio, precioservicio)
+    values (nservicio, dservicio, pservicio);
+end //
+delimiter ;
+call sp_agregarservicio('alineación', 'alineación de ruedas', 150.00);
+call sp_agregarservicio('balanceo', 'balanceo de llantas', 120.00);
+call sp_agregarservicio('cambio de aceite', 'aceite sintético 10w-30', 200.00);
+call sp_agregarservicio('lavado', 'lavado completo interior y exterior', 100.00);
+call sp_agregarservicio('diagnóstico', 'escaneo completo del vehículo', 250.00);
+call sp_agregarservicio('frenos', 'revisión y cambio de frenos', 300.00);
+call sp_agregarservicio('suspensión', 'ajuste y revisión de suspensión', 400.00);
+call sp_agregarservicio('pintura', 'pintura general de vehículo', 1200.00);
+call sp_agregarservicio('revisión general', 'revisión de 30 puntos', 180.00);
+call sp_agregarservicio('electricidad', 'revisión del sistema eléctrico', 350.00);
+
+-- ----------- Listar Servicio ---------------------
+delimiter //
+create procedure sp_listarservicio()
+begin
+    select codigoservicio, nombreservicio, descripcionservicio, precioservicio from servicio;
+end //
+delimiter ;
+call sp_listarservicio();
+
+-- ------------ Eliminar Servicio ------------------
+delimiter //
+create procedure sp_eliminarservicio(in cservicio int)
+begin
+    delete from servicio where codigoservicio = cservicio;
+end //
+delimiter ;
+-- call sp_eliminarservicio(3);
+
+-- ---------------- Buscar Servicio ------------
+delimiter //
+create procedure sp_buscarservicio(in cservicio int)
+begin
+    select codigoservicio, nombreservicio, descripcionservicio, precioservicio 
+    from servicio 
+    where codigoservicio = cservicio;
+end //
+delimiter ;
+call sp_buscarservicio(5);
+
+-- -------------- Editar Servicio ---------------
+delimiter //
+create procedure sp_editarservicio(
+    in cservicio int,
+    in nservicio varchar(250),
+    in dservicio varchar(250),
+    in pservicio double
+)
+begin
+    update servicio
+    set nombreservicio = nservicio,
+        descripcionservicio = dservicio,
+        precioservicio = pservicio
+    where codigoservicio = cservicio;
+end //
+delimiter ;
+call sp_editarservicio(4, 'lavado premium', 'lavado con cera y desinfección interior', 180.00);
