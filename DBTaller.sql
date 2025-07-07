@@ -1,4 +1,4 @@
-drop database if exists DB_Taller;
+-- drop database if exists DB_Taller;
 create database DB_Taller;
 use DB_Taller;
 
@@ -124,7 +124,59 @@ create table OrdenReparacion(
 		references Reparacion(codigoReparacion)
 );		
 
+-- factura
+create table factura(
+	codigoFactura int not null auto_increment,
+    codigoClienteFactura int not null,
+    codigoEmpleadoFactura int not null,
+    codigoAutoFactura int not null,
+    fechaEmision date,
+    total double(10,2) default 0.0, -- con trigger xd
+    metodoPago enum("Targeta","Efectivo"),
+    primary key PK_codigoFactura(codigoFactura),
+    constraint FK_codigoFactura_Cliente foreign key (codigoClienteFactura)
+		references Cliente(codigoCliente)on delete cascade,
+	constraint FK_codigoFactura_Empleado foreign key(codigoEmpleadoFactura)
+		references Empleado(codigoEmpleado)on delete cascade,
+	constraint FK_codigoFactura_Auto foreign key (codigoAutoFactura)
+		references Auto(codigoAuto)on delete cascade
+);
+-- detalleFactura
+create table DetalleFactura (
+    codigoDetalle int not null auto_increment,
+    codigoFactura int not null,
+    tipoGasto enum('Servicio','Reparacion','Llanta','Repuesto','Accesorio') not null,
+    codigoGasto int not null,
+    cantidad int not null,
+    primary key PK_codigoDetalle(codigoDetalle),
+    constraint FK_DetalleFactura_Factura foreign key (codigoFactura) 
+		references factura(codigoFactura)on delete cascade
+);
 
+-- TRIGGERS
+-- TRIGGER PARA PRECIO DE FACTURA
+-- TRIGGER PARA EL PRECIO
+DELIMITER //
+create trigger tr_actualizar_totalFactura
+	after insert on detalleFactura
+    for each row
+		begin
+			declare precio double(10,2);
+            
+            set precio = case new.tipoGasto
+            when 'Servicio' then (select precioServicio from servicio where codigoServicio = new.codigoGasto)
+            when 'Reparacion' then (select precioReparacion from reparacion where codigoReparacion = new.codigoGasto)
+            when 'Llanta' then( select precioLlanta from llanta where codigoLlanta = new.codigoGasto)
+            when 'Repuesto' then(select precioRepuesto from repuesto where codigoRepuesto = new.codigoGasto)
+            when 'Accesorio' then(select precioAccesorio from accesorio where codigoAccesorio = new.codigoGasto)
+            else 0
+            end;
+				update Factura
+                set total = total + (precio*new.cantidad)
+					where codigoFactura = new.codigoFactura;
+        end ;
+//
+DELIMITER 
 
 -- ---------------------------------SP EMPLEADOS ------------------------------------
 
@@ -172,7 +224,7 @@ BEGIN
 	DELETE FROM Empleado WHERE codigoEmpleado = cEmpleado;
 END //
 DELIMITER ;
-CALL sp_EliminarEmpleado(3);
+-- CALL sp_EliminarEmpleado(3);
 
 -- Buscar --
 DELIMITER //
@@ -486,7 +538,7 @@ begin
     where codigoRepuesto = codiRep;
 end$$
 delimiter ;
-call sp_EliminarRepuesto (4); 
+-- call sp_EliminarRepuesto (4); 
 
 -- ------ Modificar Repuesto -------------
 Delimiter $$
@@ -591,7 +643,7 @@ BEGIN
 END //
 DELIMITER ;
 
-CALL sp_eliminarAccesorio(5);
+-- CALL sp_eliminarAccesorio(5);
 
 -- Procedimientos almacenados 
 -- Procedimiento almacenado de Servicio
@@ -942,5 +994,142 @@ BEGIN
 	WHERE codigoOrdenReparacion = codigoOrdenReparacion;
 END//
 DELIMITER ;
+-- Procedimientos almacenados de factura 
+-- agregar factura
+DELIMITER //
+create procedure sp_agregarFactura(
+	in codigoClienteFactura int,
+    in codigoEmpleadoFactura int ,
+    in codigoAutoFactura int ,
+    in fechaEmision date ,
+    in metodoPago enum("Targeta","Efectivo")
+)
+	begin
+		insert into Factura(codigoClienteFactura, codigoEmpleadoFactura, codigoAutoFactura, fechaEmision, metodoPago)
+			value(codigoClienteFactura, codigoEmpleadoFactura, codigoAutoFactura, fechaEmision, metodoPago);
+    end //
+DELIMITER ;
+call sp_agregarFactura(1,1,1,"2025-01-10","Efectivo");
+call sp_agregarFactura(2,5,2,"2025-01-15","Efectivo");
+call sp_agregarFactura(3,7,3,"2025-01-20","Efectivo");
+call sp_agregarFactura(4,9,4,"2025-01-25","Efectivo");
+call sp_agregarFactura(5,9,5,"2025-02-02","Efectivo");
+call sp_agregarFactura(6,9,6,"2025-02-08","Efectivo");
+call sp_agregarFactura(7,7,7,"2025-02-14","Efectivo");
+call sp_agregarFactura(8,7,8,"2025-03-01","Efectivo");
+call sp_agregarFactura(9,5,9,"2025-03-03","Efectivo");
+call sp_agregarFactura(10,1,10,"2025-03-09","Efectivo");
+call sp_agregarFactura(11,1,11,"2025-03-10","Efectivo");
+call sp_agregarFactura(12,5,12,"2025-03-15","Efectivo");
 
+-- VER FACTURAS -
+DELIMITER //
+create procedure sp_ListarFactura()
+	begin
+		select codigoFactura, codigoClienteFactura, codigoEmpleadoFactura, codigoAutoFactura, fechaEmision, total, metodoPago from Factura;
+    end//
+DELIMITER ;
+call sp_ListarFactura();
+
+-- BUSCAR FACURA --
+DELIMITER //
+create procedure sp_BuscarFactura(in buscarFactura int)
+begin
+		select codigoFactura, codigoClienteFactura, codigoEmpleadoFactura, codigoAutoFactura, fechaEmision, total, metodoPago from Factura
+			where codigoFactura = buscarFactura;
+    end//
+DELIMITER ;
+call sp_BuscarFactura(1);
+
+-- ELIMINAR FACTURA
+DELIMITER //
+create procedure sp_EliminarFactura(in exFactura int)
+	begin
+		delete from Factura
+			where codigoFactura = exFactura;
+    end //
+DELIMITER ;
+-- call sp_EliminarFactura(1);
+
+-- ACTUALIZAR FACTURA
+DELIMITER //
+create procedure sp_EditarFactura(
+	in idFactura int,
+    in cliente int,
+    in empleado int ,
+    in auto int ,
+    in fechaIngreso date ,
+    in totalPago double(10,2),
+    in formaPago enum("Targeta","Efectivo")
+)
+	begin
+		update Factura
+			set
+			codigoClienteFactura = cliente,
+            codigoEmpleadoFactura = empleado, 
+            codigoAutoFactura = auto,
+            fechaEmision = fechaIngreso,
+            total = totalPago,
+            metodoPago = formaPago
+				where codigoFactura = idFactura;
+    end //
+DELIMITER ;
+call sp_EditarFactura(2,2,5,2,"2025-01-15",0.0,"Targeta");
+
+-- PROCEDIMIENO DETALLE FACTURA
+-- AGREGAR DETALLESFACTURA
+DELIMITER //
+create procedure sp_AgregarDetalleFactura(
+	in codigoFactura int, 
+    in tipoGasto enum('Servicio','Reparacion','Llanta','Repuesto','Accesorio'), 
+    in codigoGasto int, 
+    in cantidad int
+)
+	begin	
+		insert into detalleFactura(codigoFactura, tipoGasto, codigoGasto, cantidad)
+			value(codigoFactura, tipoGasto, codigoGasto, cantidad);
+    end //
+DELIMITER ;
+call sp_AgregarDetalleFactura(1,'Reparacion',1,1);
+call sp_AgregarDetalleFactura(2,'Llanta',2,4);
+call sp_AgregarDetalleFactura(3,'Reparacion',3,1);
+call sp_AgregarDetalleFactura(4,'Servicio',4,1);
+call sp_AgregarDetalleFactura(5,'Servicio',5,1);
+call sp_AgregarDetalleFactura(6,'Reparacion',6,1);
+call sp_AgregarDetalleFactura(7,'Repuesto',7,3);
+call sp_AgregarDetalleFactura(8,'Accesorio',8,5);
+call sp_AgregarDetalleFactura(9,'Repuesto',9,1);
+call sp_AgregarDetalleFactura(10,'Reparacion',10,1);
+call sp_AgregarDetalleFactura(11,'Llanta',11,8);
+
+-- MOSTRAR DETALLEFACTURA
+DELIMITER //
+create procedure sp_MostrarDetallesFactura()
+	begin
+		select codigoDetalle, codigoFactura, tipoGasto, codigoGasto, cantidad
+			from detalleFactura;
+    end //
+DELIMITER ;
+call sp_MostrarDetallesFactura();
+
+-- BUSCAR DETALLE FACTURA
+DELIMITER //
+create procedure sp_BuscarDetalleFactura(in buscarDetalle int)
+	begin
+		select codigoDetalle, codigoFactura, tipoGasto, codigoGasto, cantidad
+			from detalleFactura where buscarDetalle = codigoDetalle;
+    end //
+DELIMITER ;
+call sp_BuscarDetalleFactura(1);
+
+
+-- ELIMINAR DETALLEFACTURA
+DELIMITER //
+create procedure sp_EliminarDetalleFactura(in exDetalle int )
+	begin
+		delete from detallefactura
+			where codigoFactura = exDetalle;
+    end //
+DELIMITER ;
+-- call sp_EliminarDetalleFactura(11);
 
