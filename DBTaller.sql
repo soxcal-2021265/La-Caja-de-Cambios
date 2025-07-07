@@ -45,6 +45,16 @@ create table Llanta(
     primary key PK_codigoLlanta (codigoLlanta)
 );
 
+-- Entidad Repuestos
+create table Repuesto(
+	codigoRepuesto int not null auto_increment,
+    nombreRepuesto varchar(250) not null,
+    descripcionRepuesto varchar(250) not null,
+    precioRepuesto double(10,2) not null,
+    stockRepuesto int,
+    estadoRepuesto enum("Disponibles","Agotados") not null,
+    primary key PK_codigoRepuesto(codigoRepuesto)
+);
 
 -- ACCESORIOS
 create table Accesorio(
@@ -396,6 +406,88 @@ create procedure sp_editarLLanta(
 DELIMITER ;
 call sp_editarLlanta(1,"250","22","Radial","23","91");
 
+-- Procedimiento almacenado de Repuesto
+-- ------ Agregar Repuesto -------------
+Delimiter $$
+Create procedure sp_AgregarRepuesto (
+    in nomRep varchar(250),
+    in descRep varchar(250),
+    in precio double(10,2),
+    in stock int,
+    in estado enum('Disponibles', 'Agotados')
+)
+begin
+    insert into Repuesto (nombreRepuesto, descripcionRepuesto, precioRepuesto, stockRepuesto, estadoRepuesto)
+    values (nomRep, descRep, precio, stock, estado);
+end$$
+Delimiter ;
+
+call sp_AgregarRepuesto('Filtro de aceite', 'Filtro compatible con Toyota', 55.75, 20, 'Disponibles');
+call sp_AgregarRepuesto('Bujía NGK', 'Bujía para motores 4 cilindros', 32.00, 50, 'Disponibles');
+call sp_AgregarRepuesto('Pastillas de freno', 'Pastillas cerámicas delanteras', 110.99, 0, 'Agotados');
+call sp_AgregarRepuesto('Aceite sintético 10W40', 'Galón de aceite sintético', 210.50, 35, 'Disponibles');
+call sp_AgregarRepuesto('Filtro de aire', 'Filtro estándar para SUV', 44.00, 0, 'Agotados');
+call sp_AgregarRepuesto('Correa de distribución', 'Correa para motor 2.0L', 85.25, 15, 'Disponibles');
+call sp_AgregarRepuesto('Amortiguador', 'Amortiguador trasero para sedan', 120.00, 12, 'Disponibles');
+call sp_AgregarRepuesto('Radiador', 'Radiador para motor 1.8L', 180.00, 5, 'Disponibles');
+call sp_AgregarRepuesto('Batería 12V', 'Batería estándar para autos compactos', 150.00, 8, 'Disponibles');
+call sp_AgregarRepuesto('Bombilla faro', 'Bombilla halógena para faros delanteros', 25.50, 40, 'Disponibles');
+call sp_AgregarRepuesto('Aceite de transmisión', 'Aceite para transmisión automática', 95.00, 10, 'Disponibles');
+
+
+-- ------ Listar Repuesto -------------
+Delimiter $$
+Create procedure sp_ListarRepuestos ()
+begin
+    select codigoRepuesto, nombreRepuesto, descripcionRepuesto, precioRepuesto, stockRepuesto, estadoRepuesto
+		from Repuesto;
+end$$
+Delimiter ;
+call sp_ListarRepuestos(); 
+
+-- ------ Buscar Repuesto -------------
+Delimiter $$
+Create Procedure sp_BuscarRepuesto (in codiRep int)
+begin
+    select codigoRepuesto, nombreRepuesto, descripcionRepuesto, precioRepuesto, stockRepuesto, estadoRepuesto
+		from Repuesto
+    where codigoRepuesto = codiRep;
+end$$
+Delimiter ;
+call sp_BuscarRepuesto(2); 
+
+-- ------ Eliminar Repuesto -------------
+Delimiter $$
+Create procedure sp_EliminarRepuesto (in codiRep int)
+begin
+    delete from Repuesto
+    where codigoRepuesto = codiRep;
+end$$
+delimiter ;
+call sp_EliminarRepuesto (4); 
+
+-- ------ Modificar Repuesto -------------
+Delimiter $$
+Create procedure sp_EditarRepuesto (
+    in codiRep int,
+    in nom varchar(250),
+    in descrip varchar(250),
+    in precio double(10,2),
+    in stock int,
+    in estado enum('Disponibles', 'Agotados')
+)
+begin
+    update Repuesto
+    set 
+        nombreRepuesto = nom,
+        descripcionRepuesto = descrip,
+        precioRepuesto = precio,
+        stockRepuesto = stock,
+        estadoRepuesto = estado
+    where codigoRepuesto = codiRep;
+end$$
+Delimiter ;
+
 -- PROCEDIMIENTOS DE ACCESORIOS
 DELIMITER //
 CREATE PROCEDURE sp_insertarAccesorio(
@@ -715,3 +807,5 @@ BEGIN
 	WHERE codigoOrdenReparacion = codigoOrdenReparacion;
 END//
 DELIMITER ;
+
+
