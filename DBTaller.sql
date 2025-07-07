@@ -66,6 +66,35 @@ create table Servicio(
     primary key PK_codigoServicio(codigoServicio)
 );
 
+-- Reparacion /cambios de piesas
+create table Reparacion(
+	codigoReparacion int not null auto_increment,
+	nombreReparacion varchar(250) not null,
+    descripcionReparacion varchar(250)not null,
+    precioReparacion double(10,2)not null,
+    primary key PK_codigoReparacion(codigoReparacion)
+);
+
+-- Orden Reparacion 
+create table OrdenReparacion(
+	codigoOrdenReparacion int not null auto_increment,
+	codigoAutoReparacion int not null,
+    codigoClienteReparacion int not null,
+    codigoEmpleadoReparacion int not null,
+    codigoReparacion int not null,
+    fechaIngresoReparacion date,
+    estadoReparacion enum("Pendiente","En proceso","Finalizado"),
+    primary key PK_codigoOrdenReparacion(codigoOrdenReparacion),
+    constraint FK_ordenReparacion_Auto foreign key(codigoAutoReparacion)
+		references Auto(codigoAuto),
+	constraint FK_ordenReparacion_Cliente foreign key(codigoClienteReparacion)
+		references Cliente(codigoCliente),
+	constraint FK_ordenReparacion_Empleado foreign key(codigoEmpleadoReparacion)
+		references Empleado(codigoEmpleado),
+	constraint FK_ordenReparacion_Reparacion foreign key(codigoReparacion)
+		references Reparacion(codigoReparacion)
+);		
+
 
 
 -- ---------------------------------SP EMPLEADOS ------------------------------------
@@ -521,3 +550,168 @@ begin
 end //
 delimiter ;
 call sp_editarservicio(4, 'lavado premium', 'lavado con cera y desinfección interior', 180.00);
+
+-- ---------------- REPARACION -------------
+-- AGREGAR REPARACION
+DELIMITER //
+CREATE PROCEDURE sp_AgregarReparacion(
+	IN nombreReparacion VARCHAR(250),
+	IN descripcionReparacion VARCHAR(250),
+	IN precioReparacion DOUBLE(10,2)
+)
+BEGIN
+	INSERT INTO Reparacion (nombreReparacion, descripcionReparacion, precioReparacion)
+    VALUES (nombreReparacion, descripcionReparacion, precioReparacion);
+END//
+DELIMITER ;
+
+CALL sp_AgregarReparacion('Cambio de aceite', 'Aceite sintético y filtro nuevo', 250.00);
+CALL sp_AgregarReparacion('Cambio de frenos', 'Pastillas delanteras nuevas', 450.00);
+CALL sp_AgregarReparacion('Alineación y balanceo', 'Ruedas alineadas y balanceadas', 300.00);
+CALL sp_AgregarReparacion('Revisión del motor', 'Chequeo de sensores y niveles', 500.00);
+CALL sp_AgregarReparacion('Cambio de batería', 'Instalación de batería 12V nueva', 620.00);
+CALL sp_AgregarReparacion('Cambio de bujías', 'Sustitución de bujías desgastadas', 200.00);
+CALL sp_AgregarReparacion('Reparación de suspensión', 'Reemplazo de amortiguadores', 800.00);
+CALL sp_AgregarReparacion('Revisión de frenos ABS', 'Diagnóstico y ajuste de ABS', 550.00);
+CALL sp_AgregarReparacion('Limpieza de inyectores', 'Servicio con ultrasonido', 350.00);
+CALL sp_AgregarReparacion('Diagnóstico electrónico', 'Escaneo completo del sistema', 400.00);
+CALL sp_AgregarReparacion('Reparación de transmisión', 'Cambio de aceite y ajuste', 950.00);
+
+
+-- LISTAR REPARACIONES
+DELIMITER //
+CREATE PROCEDURE sp_ListarReparaciones()
+BEGIN
+    SELECT codigoReparacion, nombreReparacion, descripcionReparacion, precioReparacion
+    FROM Reparacion;
+END//
+DELIMITER ;
+
+-- ELIMINAR REPARACION
+DELIMITER //
+CREATE PROCEDURE sp_EliminarReparacion(IN codigoReparacion INT)
+BEGIN
+    SET foreign_key_checks = 0;
+    DELETE FROM Reparacion WHERE codigoReparacion = codigoReparacion;
+    SET foreign_key_checks = 1;
+END//
+DELIMITER ;
+
+-- BUSCAR REPARACION
+DELIMITER //
+CREATE PROCEDURE sp_BuscarReparacion(IN codigoReparacion INT)
+BEGIN
+    SELECT codigoReparacion, nombreReparacion, descripcionReparacion, precioReparacion
+    FROM Reparacion
+    WHERE codigoReparacion = codigoReparacion;
+END//
+DELIMITER ;
+
+-- EDITAR REPARACION
+DELIMITER //
+CREATE PROCEDURE sp_EditarReparacion(
+	IN codigoReparacion INT,
+	IN nombreReparacion VARCHAR(250),
+	IN descripcionReparacion VARCHAR(250),
+	IN precioReparacion DOUBLE(10,2)
+)
+BEGIN
+	UPDATE Reparacion 
+	SET nombreReparacion = nombreReparacion,
+		descripcionReparacion = descripcionReparacion,
+		precioReparacion = precioReparacion
+	WHERE codigoReparacion = codigoReparacion;
+END//
+DELIMITER ;
+
+-- ---------------- ORDEN REPARACION -------------
+-- AGREGAR ORDEN DE REPARACION
+DELIMITER //
+CREATE PROCEDURE sp_AgregarOrdenReparacion(
+	IN codigoAutoReparacion INT,
+	IN codigoClienteReparacion INT,
+	IN codigoEmpleadoReparacion INT,
+	IN codigoReparacion INT,
+	IN fechaIngresoReparacion DATE,
+	IN estadoReparacion ENUM('Pendiente', 'En proceso', 'Finalizado')
+)
+BEGIN
+	INSERT INTO OrdenReparacion (
+		codigoAutoReparacion, codigoClienteReparacion, codigoEmpleadoReparacion,
+		codigoReparacion, fechaIngresoReparacion, estadoReparacion
+	)
+	VALUES (
+		codigoAutoReparacion, codigoClienteReparacion, codigoEmpleadoReparacion,
+		codigoReparacion, fechaIngresoReparacion, estadoReparacion
+	);
+END//
+DELIMITER ;
+
+CALL sp_AgregarOrdenReparacion(1, 1, 1, 1, '2025-07-01', 'Pendiente');
+CALL sp_AgregarOrdenReparacion(2, 2, 2, 2, '2025-07-02', 'En proceso');
+CALL sp_AgregarOrdenReparacion(3, 3, 1, 3, '2025-07-03', 'Finalizado');
+CALL sp_AgregarOrdenReparacion(4, 4, 2, 4, '2025-07-04', 'Pendiente');
+CALL sp_AgregarOrdenReparacion(5, 5, 3, 5, '2025-07-05', 'En proceso');
+CALL sp_AgregarOrdenReparacion(6, 1, 2, 6, '2025-07-06', 'Pendiente');
+CALL sp_AgregarOrdenReparacion(7, 2, 1, 7, '2025-07-07', 'En proceso');
+CALL sp_AgregarOrdenReparacion(8, 3, 3, 8, '2025-07-08', 'Finalizado');
+CALL sp_AgregarOrdenReparacion(9, 4, 2, 9, '2025-07-09', 'Pendiente');
+CALL sp_AgregarOrdenReparacion(10, 5, 1, 10, '2025-07-10', 'Finalizado');
+CALL sp_AgregarOrdenReparacion(1, 3, 2, 11, '2025-07-11', 'Pendiente');
+
+
+-- LISTAR ORDENES DE REPARACION
+DELIMITER //
+CREATE PROCEDURE sp_ListarOrdenesReparacion()
+BEGIN
+	SELECT codigoOrdenReparacion, codigoAutoReparacion, codigoClienteReparacion,
+		   codigoEmpleadoReparacion, codigoReparacion, fechaIngresoReparacion,
+		   estadoReparacion
+	FROM OrdenReparacion;
+END//
+DELIMITER ;
+
+-- ELIMINAR ORDEN DE REPARACION
+DELIMITER //
+CREATE PROCEDURE sp_EliminarOrdenReparacion(IN codigoOrdenReparacion INT)
+BEGIN
+	SET foreign_key_checks = 0;
+	DELETE FROM OrdenReparacion WHERE codigoOrdenReparacion = codigoOrdenReparacion;
+	SET foreign_key_checks = 1;
+END//
+DELIMITER ;
+
+-- BUSCAR ORDEN DE REPARACION
+DELIMITER //
+CREATE PROCEDURE sp_BuscarOrdenReparacion(IN codigoOrdenReparacion INT)
+BEGIN
+	SELECT codigoOrdenReparacion, codigoAutoReparacion, codigoClienteReparacion,
+		   codigoEmpleadoReparacion, codigoReparacion, fechaIngresoReparacion,
+		   estadoReparacion
+	FROM OrdenReparacion
+	WHERE codigoOrdenReparacion = codigoOrdenReparacion;
+END//
+DELIMITER ;
+
+-- EDITAR ORDEN DE REPARACION
+DELIMITER //
+CREATE PROCEDURE sp_EditarOrdenReparacion(
+	IN codigoOrdenReparacion INT,
+	IN codigoAutoReparacion INT,
+	IN codigoClienteReparacion INT,
+	IN codigoEmpleadoReparacion INT,
+	IN codigoReparacion INT,
+	IN fechaIngresoReparacion DATE,
+	IN estadoReparacion ENUM('Pendiente', 'En proceso', 'Finalizado')
+)
+BEGIN
+	UPDATE OrdenReparacion
+	SET codigoAutoReparacion = codigoAutoReparacion,
+		codigoClienteReparacion = codigoClienteReparacion,
+		codigoEmpleadoReparacion = codigoEmpleadoReparacion,
+		codigoReparacion = codigoReparacion,
+		fechaIngresoReparacion = fechaIngresoReparacion,
+		estadoReparacion = estadoReparacion
+	WHERE codigoOrdenReparacion = codigoOrdenReparacion;
+END//
+DELIMITER ;
