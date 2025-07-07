@@ -35,6 +35,17 @@ create table Auto(
 		references Cliente (codigoCliente)
 );
 
+-- ACCESORIOS
+create table Accesorio(
+	codigoAccesorio int not null auto_increment,
+    nombreAccesorio varchar(250) not null,
+    descripcionAccesorio varchar(250)not null,
+    precioAccesorio double (10,2)not null,
+    stockAccesorio int,
+    estadoAccesorio enum("Disponibles","Agotados") not null,
+    primary key PK_codigoAccesorio(codigoAccesorio)
+);
+
 -- ---------------------------------SP EMPLEADOS ------------------------------------
 
 -- Agregar --
@@ -257,3 +268,87 @@ begin
 end //
 delimiter ;
 call sp_BuscarAuto(1);
+
+-- PROCEDIMIENTOS DE ACCESORIOS
+DELIMITER //
+CREATE PROCEDURE sp_insertarAccesorio(
+    IN p_nombre VARCHAR(250),
+    IN p_descripcion VARCHAR(250),
+    IN p_precio DOUBLE(10,2),
+    IN p_stock INT,
+    IN p_estado ENUM('Disponibles','Agotados')
+)
+BEGIN
+    INSERT INTO Accesorio (nombreAccesorio, descripcionAccesorio, precioAccesorio, stockAccesorio, estadoAccesorio)
+    VALUES (p_nombre, p_descripcion, p_precio, p_stock, p_estado);
+END //
+DELIMITER ;
+
+CALL sp_insertarAccesorio ('Filtro de aceite', 'Filtro para motor 4 cilindros', 45.00, 10, 'Disponibles');
+CALL sp_insertarAccesorio ('Aceite 10W-30', 'Aceite sintético 1L', 90.00, 15, 'Disponibles');
+CALL sp_insertarAccesorio ('Batería 12V', 'Batería de auto estándar', 600.00, 3, 'Disponibles');
+CALL sp_insertarAccesorio ('Pastillas de freno', 'Juego delantero para sedán', 150.00, 5, 'Disponibles');
+CALL sp_insertarAccesorio ('Limpiaparabrisas', 'Juego de escobillas 20 pulgadas', 75.00, 8, 'Disponibles');
+CALL sp_insertarAccesorio ('Fusible universal', 'Fusible de repuesto 10A', 5.00, 0, 'Agotados');
+CALL sp_insertarAccesorio ('Anticongelante', 'Botella de refrigerante 1L', 65.00, 6, 'Disponibles');
+CALL sp_insertarAccesorio ('Cargador USB', 'Cargador doble para auto', 40.00, 12, 'Disponibles');
+CALL sp_insertarAccesorio ('Tapones de válvula', 'Juego de 4 tapones cromados', 20.00, 0, 'Agotados');
+CALL sp_insertarAccesorio ('Alfombra de hule', 'Alfombra universal para auto', 130.00, 7, 'Disponibles');
+CALL sp_insertarAccesorio ('Soporte para celular', 'Soporte magnético para auto', 60.00, 4, 'Disponibles');
+
+DELIMITER //
+CREATE PROCEDURE sp_listarAccesorios()
+BEGIN
+    SELECT 
+        codigoAccesorio,
+        nombreAccesorio,
+        descripcionAccesorio,
+        precioAccesorio,
+        stockAccesorio,
+        estadoAccesorio
+    FROM Accesorio;
+END //
+DELIMITER ;
+
+CALL sp_listarAccesorios();
+
+DELIMITER //
+CREATE PROCEDURE sp_buscarAccesorio(
+    IN codigoAc int
+)
+BEGIN
+    SELECT codigoAccesorio, nombreAccesorio, descripcionAccesorio, precioAccesorio, stockAccesorio, estadoAccesorio FROM Accesorio
+    WHERE codigoAccesorio = codigoAc;
+END //
+DELIMITER ;
+ 
+CALL sp_buscarAccesorio(1);
+
+DELIMITER //
+CREATE PROCEDURE sp_editarAccesorio(
+    IN p_codigo INT,
+    IN p_nombre VARCHAR(250),
+    IN p_descripcion VARCHAR(250),
+    IN p_precio DOUBLE(10,2),
+    IN p_stock INT,
+    IN p_estado ENUM('Disponibles','Agotados')
+)
+BEGIN
+    UPDATE Accesorio
+    SET nombreAccesorio = p_nombre, descripcionAccesorio = p_descripcion, precioAccesorio = p_precio, stockAccesorio = p_stock, estadoAccesorio = p_estado
+    WHERE codigoAccesorio = p_codigo;
+END //
+DELIMITER ;
+
+CALL sp_editarAccesorio(1, 'Filtro de aceite premium', 'Filtro reforzado', 55.00, 8, 'Disponibles');
+
+
+DELIMITER //
+CREATE PROCEDURE sp_eliminarAccesorio(IN p_codigo INT)
+BEGIN
+    DELETE FROM Accesorio WHERE codigoAccesorio = p_codigo;
+END //
+DELIMITER ;
+
+CALL sp_eliminarAccesorio(5);
+
