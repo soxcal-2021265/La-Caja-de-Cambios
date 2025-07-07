@@ -35,6 +35,17 @@ create table Auto(
 		references Cliente (codigoCliente)
 );
 
+create table Llanta(
+	codigoLlanta int not null auto_increment,
+    anchoMilimentos int not null, -- ancho de lado a lado
+    perfil int not null,  -- ofrece estabilidad
+    tipoConstruccion enum("Radial","Diagonal","Cinturada") not null,-- durabilidad y agarre
+    diametroRin int not null, -- diametro en pulgadas 
+    cargaMaximakg int not null,
+    primary key PK_codigoLlanta (codigoLlanta)
+);
+
+
 -- ACCESORIOS
 create table Accesorio(
 	codigoAccesorio int not null auto_increment,
@@ -54,6 +65,7 @@ create table Servicio(
     precioServicio double(10,2)not null,
     primary key PK_codigoServicio(codigoServicio)
 );
+
 
 
 -- ---------------------------------SP EMPLEADOS ------------------------------------
@@ -278,6 +290,82 @@ begin
 end //
 delimiter ;
 call sp_BuscarAuto(1);
+
+-- procedimientos almacenados de llanta --
+
+DELIMITER $$
+create procedure sp_nuevaLlanta(
+    in anchoMilimentos int,
+    in perfil int,
+    in tipoConstruccion enum("Radial","Diagonal","Cinturada"),
+    in diametroRin int, 
+    in cargaMaximakg int
+)
+	begin
+		insert into Llanta(codigoLlanta, anchoMilimentos, perfil, tipoConstruccion, diametroRin, cargaMaximakg)
+			value(codigoLlanta, anchoMilimentos, perfil, tipoConstruccion, diametroRin, cargaMaximakg);
+    end$$
+DELIMITER ;
+call sp_nuevaLlanta("250","22","Radial","23","91");
+call sp_nuevaLlanta(195, 65, 'Radial', 15, 615);
+call sp_nuevaLlanta(205, 55, 'Radial', 16, 670);
+call sp_nuevaLlanta(215, 60, 'Radial', 16, 710);
+call sp_nuevaLlanta(225, 45, 'Cinturada', 17, 750);
+call sp_nuevaLlanta(235, 50, 'Radial', 18, 800);
+call sp_nuevaLlanta(245, 40, 'Cinturada', 19, 850);
+call sp_nuevaLlanta(265, 70, 'Diagonal', 16, 950);
+call sp_nuevaLlanta(275, 65, 'Radial', 17, 975);
+call sp_nuevaLlanta(285, 75, 'Diagonal', 16, 1100);
+call sp_nuevaLlanta(295, 80, 'Diagonal', 20, 1250);
+call sp_nuevaLlanta(305, 55, 'Radial', 22, 1350);
+call sp_nuevaLlanta(315, 70, 'Cinturada', 24, 1500);
+DELIMITER $$
+create procedure sp_verllantas()
+	begin
+		select codigoLlanta, anchoMilimentos, perfil, tipoConstruccion, diametroRin, cargaMaximakg from Llanta;
+    end$$
+DELIMITER ;
+call sp_verllantas();
+
+DELIMITER $$
+create procedure sp_buscarLlanta(in bllanta int)
+	begin
+		select codigoLlanta, anchoMilimentos, perfil, tipoConstruccion, diametroRin, cargaMaximakg from Llanta
+			where codigoLlanta = bllanta;
+    end $$
+DELIMITER ;
+call sp_buscarLlanta(1);
+
+DELIMITER $$
+create procedure sp_EliminarLanta( in borrarllanta int)
+	begin
+		delete from Llanta
+			where codigoLlanta = borrarllanta;
+    end $$
+DELIMITER ;
+call sp_EliminarLanta(11);
+
+DELIMITER $$
+create procedure sp_editarLLanta(
+	in _codigoLlanta int,
+	in _anchoMilimentos int,
+    in _perfil int,
+    in _tipoConstruccion enum("Radial","Diagonal","Cinturada"),
+    in _diametroRin int, 
+    in _cargaMaximakg int
+    )
+    begin
+		update Llanta
+			set
+				anchoMilimentos  = _anchoMilimentos,
+				perfil = _perfil,
+				tipoConstruccion = _tipoConstruccion,
+				diametroRin = _diametroRin,
+				cargaMaximakg  = _cargaMaximakg
+                where codigoLlanta = _codigoLlanta;
+	end $$
+DELIMITER ;
+call sp_editarLlanta(1,"250","22","Radial","23","91");
 
 -- PROCEDIMIENTOS DE ACCESORIOS
 DELIMITER //
