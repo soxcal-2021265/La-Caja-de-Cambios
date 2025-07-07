@@ -2,6 +2,17 @@ drop database if exists DB_Taller;
 create database DB_Taller;
 use DB_Taller;
 
+-- empleado
+create table Empleado(
+	codigoEmpleado int not null auto_increment,
+    nombreEmpleado varchar(250) not null,
+    telefonoEmpleado char(8) not null unique,
+    correoEmpleado varchar(250) not null unique,
+    direccion varchar(250),
+    puesto enum ("Recepcionista","Mecanico"),
+    primary key PK_codigoEmpleado(codigoEmpleado)
+);
+
 -- CLIENTE/USUARIO
 create table Cliente(
 	codigoCliente int not null auto_increment,
@@ -23,6 +34,85 @@ create table Auto(
     constraint FK_Auto_Cliente foreign key (codigoCliente)
 		references Cliente (codigoCliente)
 );
+
+-- ---------------------------------SP EMPLEADOS ------------------------------------
+
+-- Agregar --
+DELIMITER //
+CREATE PROCEDURE sp_AgregarEmpleado(
+    IN nEmpleado VARCHAR(250),
+    IN tEmpleado CHAR(8),
+    IN coEmpleado VARCHAR(250),
+    IN dEmpleado VARCHAR(250), 
+    IN pEmpleado ENUM('Recepcionista','Mecanico')
+)
+BEGIN
+    INSERT INTO Empleado (nombreEmpleado, telefonoEmpleado, correoEmpleado, direccion, puesto)
+    VALUES (nEmpleado, tEmpleado, coEmpleado, dEmpleado, pEmpleado);
+END //
+DELIMITER ;
+
+CALL sp_AgregarEmpleado('Camila', '33727865', 'camila@gmail.com', 'Zona 8', 'Recepcionista');
+CALL sp_AgregarEmpleado('Luis', '44928374', 'luis@gmail.com', 'Zona 1', 'Mecanico');
+CALL sp_AgregarEmpleado('Andrea', '32018745', 'andrea@gmail.com', 'Zona 7', 'Recepcionista');
+CALL sp_AgregarEmpleado('Carlos', '55429873', 'carlos@gmail.com', 'Zona 2', 'Mecanico');
+CALL sp_AgregarEmpleado('Paola', '33098745', 'paola@gmail.com', 'Zona 5', 'Recepcionista');
+CALL sp_AgregarEmpleado('Jorge', '44982736', 'jorge@gmail.com', 'Zona 4', 'Mecanico');
+CALL sp_AgregarEmpleado('María', '30129873', 'maria@gmail.com', 'Zona 9', 'Recepcionista');
+CALL sp_AgregarEmpleado('Pedro', '44990123', 'pedro@gmail.com', 'Zona 2', 'Mecanico');
+CALL sp_AgregarEmpleado('Lucía', '33724567', 'lucia@gmail.com', 'Zona 6', 'Recepcionista');
+CALL sp_AgregarEmpleado('José', '55890123', 'jose@gmail.com', 'Zona 10', 'Mecanico');
+CALL sp_AgregarEmpleado('Mario', '66338542', 'mario@gmail.com', 'Zona 11', 'Mecanico');
+
+-- Listar --
+DELIMITER //
+CREATE PROCEDURE sp_ListarEmpleado()
+BEGIN
+    SELECT  codigoEmpleado, nombreEmpleado, telefonoEmpleado, correoEmpleado, direccion, puesto FROM Empleado;
+END //
+DELIMITER ;
+
+CALL sp_ListarEmpleado();
+
+-- Eliminar --
+DELIMITER //
+CREATE PROCEDURE sp_EliminarEmpleado(IN cEmpleado INT)
+BEGIN
+	DELETE FROM Empleado WHERE codigoEmpleado = cEmpleado;
+END //
+DELIMITER ;
+CALL sp_EliminarEmpleado(3);
+
+-- Buscar --
+DELIMITER //
+CREATE PROCEDURE sp_BuscarEmpleado(IN cEmpleado INT)
+BEGIN
+    SELECT codigoEmpleado, nombreEmpleado, telefonoEmpleado, correoEmpleado, direccion, puesto FROM Empleado WHERE codigoEmpleado = cEmpleado;
+END //
+DELIMITER ;
+CALL sp_BuscarEmpleado(5);
+
+-- Editar --
+DELIMITER //
+CREATE PROCEDURE sp_EditarEmpleado(
+	IN cEmpleado INT,
+    IN nEmpleado VARCHAR(250),
+    IN tEmpleado CHAR(8),
+    IN coEmpleado VARCHAR(250),
+    IN dEmpleado VARCHAR(250), 
+    IN pEmpleado ENUM('Recepcionista','Mecanico')
+)
+BEGIN
+    UPDATE Empleado
+    SET nombreEmpleado= nEmpleado,
+        telefonoEmpleado = tEmpleado,
+        correoEmpleado = coEmpleado,
+        direccion = dEmpleado,
+        puesto = pEmpleado
+    WHERE codigoEmpleado = cEmpleado;
+END //
+DELIMITER ;
+CALL sp_EditarEmpleado(4, 'Robereto', '44998877', 'roberto@gmail.com', 'Zona 10', 'Mecanico');
 
 -- PROCEDIMIENTOS ALMACENADOS
 -- CLIENTE
