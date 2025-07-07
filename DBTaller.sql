@@ -75,7 +75,25 @@ create table Servicio(
     precioServicio double(10,2)not null,
     primary key PK_codigoServicio(codigoServicio)
 );
-
+-- order de servicio
+create table OrdenServicio(
+	codigoOrdenServicio int not null auto_increment,
+    codigoAuto int not null,
+    codigoCliente int not null,
+    codigoEmpleado int not null,
+    codigoServicio int not null,
+    fechaIngreso date,
+    estado enum("Pendiente","En proceso","Finalizado"),
+    primary key PK_codigoOrdenServicio(codigoOrdenServicio),
+    constraint FK_ordenServicio_Auto foreign key(codigoAuto)
+		references Auto(codigoAuto),
+	constraint FK_ordenServicio_Cliente foreign key(codigoCliente)
+		references Cliente(codigoCliente),
+	constraint FK_ordenServicio_Empleado foreign key(codigoEmpleado)
+		references Empleado(codigoEmpleado),
+	constraint FK_ordenServicio_Servicio foreign key(codigoServicio)
+		references Servicio(codigoServicio)
+);
 -- Reparacion /cambios de piesas
 create table Reparacion(
 	codigoReparacion int not null auto_increment,
@@ -642,6 +660,119 @@ begin
 end //
 delimiter ;
 call sp_editarservicio(4, 'lavado premium', 'lavado con cera y desinfección interior', 180.00);
+
+-- ------------------ Orden Servicio -------------------------
+-- ------------------ Agregar orden Servicio ------------------
+delimiter //
+Create procedure sp_AgregarOrdenServicio(
+	in cAuto int,
+	in cCliente int,
+	in cEmpleado int,
+	in cServicio int,
+	in fIngreso date,
+	in eOrden enum('Pendiente','En proceso','Finalizado')
+)
+begin
+	insert into OrdenServicio (codigoAuto, codigoCliente, codigoEmpleado, codigoServicio, fechaIngreso, estado)
+	values (cAuto, cCliente, cEmpleado, cServicio, fIngreso, eOrden);
+end //
+delimiter ;
+
+call sp_AgregarOrdenServicio(1, 1, 2, 1, '2025-07-01', 'Pendiente');
+call sp_AgregarOrdenServicio(2, 2, 4, 3, '2025-07-02', 'En proceso');
+call sp_AgregarOrdenServicio(3, 3, 6, 2, '2025-07-03', 'Finalizado');
+call sp_AgregarOrdenServicio(4, 4, 8, 4, '2025-07-04', 'Pendiente');
+call sp_AgregarOrdenServicio(5, 5, 10, 5, '2025-07-05', 'En proceso');
+call sp_AgregarOrdenServicio(6, 6, 11, 6, '2025-07-05', 'Finalizado');
+call sp_AgregarOrdenServicio(7, 7, 2, 7, '2025-07-06', 'Pendiente');
+call sp_AgregarOrdenServicio(8, 8, 4, 8, '2025-07-06', 'En proceso');
+call sp_AgregarOrdenServicio(9, 9, 6, 9, '2025-07-07', 'Pendiente');
+call sp_AgregarOrdenServicio(10, 10, 8, 10, '2025-07-07', 'Finalizado');
+call sp_AgregarOrdenServicio(11, 11, 10, 1, '2025-07-08', 'Pendiente');
+call sp_AgregarOrdenServicio(3, 3, 11, 3, '2025-07-08', 'En proceso');
+call sp_AgregarOrdenServicio(1, 1, 2, 5, '2025-07-09', 'Pendiente');
+call sp_AgregarOrdenServicio(5, 5, 4, 2, '2025-07-09', 'Finalizado');
+call sp_AgregarOrdenServicio(2, 2, 6, 6, '2025-07-10', 'En proceso');
+
+-- ------------------- Listar orden Servicio ---------------------
+delimiter //
+Create procedure sp_ListarOrdenServicio()
+begin
+	select
+		os.codigoOrdenServicio,
+		cl.nombreCliente,
+		au.placa,
+		em.nombreEmpleado,
+		se.nombreServicio,
+		os.fechaIngreso,
+		os.estado
+	from OrdenServicio os
+	join Cliente cl on os.codigoCliente = cl.codigoCliente
+	join Auto au on os.codigoAuto = au.codigoAuto
+	join Empleado em on os.codigoEmpleado = em.codigoEmpleado
+	join Servicio se on os.codigoServicio = se.codigoServicio;
+end //
+delimiter ;
+
+call sp_ListarOrdenServicio();
+
+-- ----------------- Eliminar orden Servicio -------------------
+delimiter //
+Create procedure sp_EliminarOrdenServicio(in cOrden int)
+begin
+	delete from OrdenServicio where codigoOrdenServicio = cOrden;
+end //
+delimiter ;
+
+-- call sp_EliminarOrdenServicio(3);
+
+-- --------------------- Buscar orden Servicio -----------------
+delimiter //
+Create procedure sp_BuscarOrdenServicio(in cOrden int)
+begin
+	select
+		os.codigoOrdenServicio,
+		cl.nombreCliente,
+		au.placa,
+		em.nombreEmpleado,
+		se.nombreServicio,
+		os.fechaIngreso,
+		os.estado
+	from OrdenServicio os
+	join Cliente cl on os.codigoCliente = cl.codigoCliente
+	join Auto au on os.codigoAuto = au.codigoAuto
+	join Empleado em on os.codigoEmpleado = em.codigoEmpleado
+	join Servicio se on os.codigoServicio = se.codigoServicio
+	where os.codigoOrdenServicio = cOrden;
+end //
+delimiter ;
+
+call sp_BuscarOrdenServicio(2);
+
+-- ------------------ Editar orden Servicio ------------------
+delimiter //
+Create procedure sp_EditarOrdenServicio(
+	in cOrden int,
+	in cAuto int,
+	in cCliente int,
+	in cEmpleado int,
+	in cServicio int,
+	in fIngreso date,
+	in eOrden enum('Pendiente','En proceso','Finalizado')
+)
+begin
+	update OrdenServicio
+	set codigoAuto = cAuto,
+		codigoCliente = cCliente,
+		codigoEmpleado = cEmpleado,
+		codigoServicio = cServicio,
+		fechaIngreso = fIngreso,
+		estado = eOrden
+	where codigoOrdenServicio = cOrden;
+end //
+delimiter ;
+
+call sp_EditarOrdenServicio(2, 1, 1, 4, 2, '2025-07-06', 'En proceso');
 
 -- ---------------- REPARACION -------------
 -- AGREGAR REPARACION
