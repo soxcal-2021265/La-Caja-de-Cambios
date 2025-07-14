@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Mesa Dorada - Comida increíble y deliciosa</title>
+
+  <!-- Fuente Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Iconos -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <!-- Estilos personalizados -->
+  <link rel="stylesheet" href="../Styles/style.css" />
+
+</head>
+
+<body>
+  <!-- Video de fondo -->
+  <video autoplay muted loop id="bg-video">
+    <source src="../Videos/background.mp4" type="video/mp4" />
+    Tu navegador no soporta el video HTML5.
+  </video>
+
+  <!-- Header con navegación -->
+  <header class="header">
+    <div class="logo">La Mesa Dorada</div>
+    <nav class="navbar">
+      <a href="index.html">Inicio</a>
+      <a href="menus.html">Menús</a>
+      <a href="about.html">Sobre Nosotros</a>
+      <a href="chefs.html">Chefs</a>
+      <a href="contact.html">Contáctanos</a>
+    </nav>
+    <form class="search-bar">
+      <input type="text" placeholder="Buscar..." />
+      <button><i class="fas fa-search"><ion-icon name="search-outline"></ion-icon></i></button>
+    </form>
+  </header>
+
+  <!-- Contenedor central -->
+  <div class="container">
+    <div class="item">
+      <div>
+        <h1>Bienvenido a La Mesa Dorada</h1>
+        <p>Por amor a la comida deliciosa.</p>
+        <p>Ubicados en Cd. Capital, Zona 17 Portales.</p>
+        <p>Horario: 8:00 AM - 10:00 PM</p>
+        <p>Tel: +502 87654121 / +502 41326985</p>
+        <p>Email: LamesaDoarda@gamil.com</p>
+      </div>
+    </div>
+
+    <!-- Panel lateral con formulario -->
+    <div class="login-section">
+      <div class="form-box login">
+        <form>
+          <h2>Reserva una mesa</h2>
+          <div class="input-box">
+            <input type="text" placeholder="Nombre completo" required />
+            <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+          </div>
+          <div class="input-box">
+            <input type="email" placeholder="Correo electrónico" required />
+            <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+          </div>
+          <div class="input-box">
+            <input type="tel" placeholder="Teléfono" required />
+            <span class="icon"><ion-icon name="call-outline"></ion-icon></span>
+          </div>
+          <button type="submit" class="btn">Reservar Ahora</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
