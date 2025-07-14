@@ -4,8 +4,8 @@
 }
  
 .text-item p {
-    font-size: 16px;
-    margin: 20px 0;
+    font-size: 20px;
+    margin: 40px 0;
 }
 
 .social-icon a i {
@@ -82,3 +82,17 @@
 .create-account p a:hover {
     text-decoration: underline;
 }
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 4px #000;
+    }
+.titulo {
+    font-size: 48px;
+    font-weight: bold;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #fff;
+    text-shadow: 1px 1px 4px #000;
+    }    
