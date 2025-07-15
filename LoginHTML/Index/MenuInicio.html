@@ -15,36 +15,97 @@
 
 <body>
   <video autoplay muted loop id="bg-video">
-    <source src="#" type="video/mp4" />
+    <source src="../Images/videocarro.mp4" type="video/mp4">
     No se logro cargar el video.
   </video>
 
   <header class="header">
-  <div class="logo-container">
-    <div class="logo">La Caja de cambios</div>
-    <div class="logo_image">
-      <img src="../Images/logo.png" alt="Logo" />
+    <div class="logo-container">
+      <div class="logo">La Caja de cambios</div>
+      <div class="logo_image">
+        <img src="../Images/logo.png" alt="Logo" />
+      </div>
     </div>
-  </div>
-  <nav class="navbar">
-    <a href="#">Inicio</a>
-    <a href="#">Servicios</a>
-    <a href="#">Reparaciones</a>
-    <a href="#">Repuestos</a>
-    <a href="#">Llantas</a>
-    <a href="#">Accesorios</a>
-  </nav>
-</header>
+    <nav class="navbar">
+      <a href="#">Inicio</a>
+      <a href="#">Servicios</a>
+      <a href="#">Reparaciones</a>
+      <a href="#">Repuestos</a>
+      <a href="#">Llantas</a>
+      <a href="#">Accesorios</a>
+    </nav>
+  </header>
 
-  <div class="container_banner">
-    <div class="item">
-      <h2 class="titulo">Caja de cambios</h2>
-        <div class="text-item">
-          <h2>Profesionales a su servicio</h2>
-                <p>Todo lo que un automovil nesesita y más a su disposición</p>
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Caja de cambios</h1>
+      <h2>Profesionales a su servicio</h2>
+      <p>Todo lo que un automóvil necesita y más a su disposición</p>
+    </div>    
+  </section>
+
+  <section class="services-section">
+    <h2>Servicios Destacados</h2>
+    <div class="services-grid">
+        <div class="service-card" data-category="mantenimiento">
+            <img src="../Images/CambioAceite.jpeg" alt="Cambio de aceite" class="service-img">
+            <h3>Cambio de Aceite</h3>
+            <p class="service-description">Servicio completo de cambio de aceite y filtro para mantener tu motor en óptimas condiciones</p>
+            <p class="service-price">Q150.99</p>
+            <button class="service-btn view-details">Ver Detalles</button>
         </div>
-      </div>    
-  </div>
+        <div class="service-card" data-category="reparaciones">
+            <img src="../Images/AlineaciónBalanceo.jpg" alt="Alineación y balanceo" class="service-img">
+            <h3>Alineación y Balanceo</h3>
+            <p class="service-description">Servicio profesional de alineación de dirección y balanceo de ruedas para un manejo suave</p>
+            <p class="service-price">Q175.99</p>
+            <button class="service-btn view-details">Ver Detalles</button>
+        </div>
+        <div class="service-card" data-category="diagnostico">
+            <img src="../Images/DComputarizado.jpg" alt="Diagnóstico computarizado" class="service-img">
+            <h3>Diagnóstico Computarizado</h3>
+            <p class="service-description">Análisis completo del sistema electrónico de tu vehículo para detectar fallas</p>
+            <p class="service-price">Q100.99</p>
+            <button class="service-btn view-details">Ver Detalles</button>
+        </div>
+        <div class="service-card" data-category="mantenimiento">
+            <img src="../Images/AireAcondicionado.jpg" alt="Diagnóstico computarizado" class="service-img">
+            <h3>Aire Acondicionado Automotriz</h3>
+            <p class="service-description">Carga de gas, revisión de compresor y limpieza del sistema para un clima ideal dentro del vehículo.</p>
+            <p class="service-price">Q145.99</p>
+            <button class="service-btn view-details">Ver Detalles</button>
+        </div>
+        <div class="service-card" data-category="diagnostico">
+            <img src="../Images/CambioFrenos.jpg" alt="Diagnóstico computarizado" class="service-img">
+            <h3>Revisión y Cambio de Frenos</h3>
+            <p class="service-description">SInspección de pastillas, discos y sistema hidráulico para garantizar una frenada segura y eficaz. </p>
+            <p class="service-price">Q199.99</p>
+            <button class="service-btn view-details">Ver Detalles</button>
+        </div>
+        <div class="service-card" data-category="mantenimiento">
+            <img src="../Images/CambioBateria.jpeg" alt="Diagnóstico computarizado" class="service-img">
+            <h3>Cambio de Bateria</h3>
+            <p class="service-description">Reemplazo seguro y rápido de la batería con revisión de carga y sistema eléctrico.</p>
+            <p class="service-price">Q99.99</p>
+            <button class="service-btn view-details">Ver Detalles</button>
+        </div>
+        <div class="service-card" data-category="mantenimiento">
+            <img src="../Images/LimpiezaInyectores.jpg" alt="Diagnóstico computarizado" class="service-img">
+            <h3>Limpieza de Inyectores</h3>
+            <p class="service-description">Proceso especializado que elimina impurezas para mejorar el consumo de combustible y el rendimiento del motor.</p>
+            <p class="service-price">Q79.99</p>
+            <button class="service-btn view-details">Ver Detalles</button>
+        </div>
+        <div class="service-card" data-category="diagnostico">
+            <img src="../Images/ServicioSuspension.jpeg" alt="Diagnóstico computarizado" class="service-img">
+            <h3>Servicio de Suspensión</h3>
+            <p class="service-description">Evaluación y mantenimiento de amortiguadores, resortes y bujes para una conducción cómoda y segura.</p>
+            <p class="service-price">Q189.99</p>
+            <button class="service-btn view-details">Ver Detalles</button>
+        </div>
+    </div>
+    <a href="servicios.html" class="btn-all-services">Ver Todos los Servicios</a>
+  </section>
 </body>
 
 </html>
