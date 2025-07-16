@@ -62,6 +62,15 @@ body::-webkit-scrollbar-thumb:hover {
     background-color: #e0246a;
     box-shadow: 0 0 5px rgba(247, 45, 122, 0.5);
 }
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1.4rem 6%;
+  background:var(--white);
+  color:var(--black);
+  flex-wrap:wrap;
+}
 
 /* Aqui coeminza el css para efectos y la separacion de la seccion  */
 .hero-section {
@@ -203,7 +212,7 @@ body::-webkit-scrollbar-thumb:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(0, 0, 0, 0.6);
+    background: #fff;
     z-index: 100;
     backdrop-filter: blur(5px);
 }
@@ -569,4 +578,42 @@ section {
         bottom: 20px;
         right: 20px;
     }
+}
+.contact-block{
+  display:flex;
+  gap:3rem;
+  color: #e0246a;
+  flex-wrap:wrap;
+}
+.contact-item{display:flex;gap:.8rem}
+.contact-item i{
+  padding-top: 60px;
+  font-size:1.4rem;
+  color:#e0246a;
+}
+.contact-item h4{
+  font-size:.75rem;
+  font-weight:600;
+  padding-top: 50px;
+  text-transform:uppercase;
+  color:#e0246a;
+}
+.contact-item span{
+  font-size:.8rem;
+  color: #000;
+}
+.navMenu{
+ position: fixed;
+    top: 150px;
+    left: 0;
+    width: 100%;
+    padding: 5px 3%;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #000;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+    justify-content: center;
 }
