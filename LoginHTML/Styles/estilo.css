@@ -9,7 +9,30 @@
 html {
     scroll-behavior: smooth;
 }
+.topbar {
+    background: #e0246a;
+    font-size: .85rem;
+    padding: .45rem 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 200;
+}
 
+.topbar i {
+    vertical-align: middle;
+}
+
+.topbar .social a {
+    color: #fff;
+    margin-left: .75rem;
+    font-size: 1rem;
+    transition: opacity .2s;
+}
 body {
     width: 100%;
     min-height: 100vh;
@@ -93,6 +116,7 @@ body::-webkit-scrollbar-thumb:hover {
     z-index: 1;
     color: white;
     max-width: 800px;
+    margin: 200px;
     padding: 20px;
     animation: fadeInUp 1.5s ease-out;
 }
