@@ -17,7 +17,7 @@ create table Empleado(
 create table Cliente(
 	codigoCliente int not null auto_increment,
     nombreCliente varchar(250) not null,
-    telefonoCliente char(8)not null unique,
+    telefonoCliente varchar(8)not null unique,
     correoCliente varchar(250) not null unique,
     direccion varchar(250),
     primary key PK_codigoCliente(codigoCliente)
@@ -1020,7 +1020,6 @@ call sp_agregarFactura(8,7,8,"2025-03-01","Efectivo");
 call sp_agregarFactura(9,5,9,"2025-03-03","Efectivo");
 call sp_agregarFactura(10,1,10,"2025-03-09","Efectivo");
 call sp_agregarFactura(11,1,11,"2025-03-10","Efectivo");
-call sp_agregarFactura(12,5,12,"2025-03-15","Efectivo");
 
 -- VER FACTURAS -
 DELIMITER //
