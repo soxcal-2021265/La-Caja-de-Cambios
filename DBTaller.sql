@@ -6,7 +6,7 @@ use DB_Taller;
 create table Empleado(
 	codigoEmpleado int not null auto_increment,
     nombreEmpleado varchar(250) not null,
-    telefonoEmpleado char(8) not null unique,
+    telefonoEmpleado varchar(8) not null unique,
     correoEmpleado varchar(250) not null unique,
     direccion varchar(250),
     puesto enum ("Recepcionista","Mecanico"),
