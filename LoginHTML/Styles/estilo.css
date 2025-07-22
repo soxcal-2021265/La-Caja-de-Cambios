@@ -2067,3 +2067,122 @@ footer {
     color: #bbb;
   }
 /* AQUI TERMINA EL CSS PARA LA PARTE DE ACCESORIOS*/
+
+/*Comienza css para Mecanicos*/
+/* Estilo general para la página */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Estilos para la sección de empleados */
+.Empleados-header {
+    text-align: center;
+    background: url('../Images/repuestos-banner.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 150px 20px;
+    color: white;
+    margin-bottom: 40px;
+}
+
+.Empleados-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.Empleados-header p {
+    font-size: 1.5rem;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #ddd;
+}
+
+/* Diseño de los empleados */
+.Empleados {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px 10%;
+}
+
+/* Cada tarjeta de empleado */
+.Empleado-info {
+    background: rgba(31, 28, 44, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.Empleado-info:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Estilo para la imagen del empleado */
+.Empleado-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Puesto y nombre del empleado */
+.Puesto {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    color: #f72d7a;
+}
+
+.Nombre {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Información del empleado */
+.Email, .Telefono, .Direccion {
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 10px;
+}
+
+.Email a {
+    color: #f72d7a;
+    text-decoration: none;
+}
+
+.Email a:hover {
+    text-decoration: underline;
+}
+
+/* Medios Responsivos */
+@media (max-width: 768px) {
+    .Empleados {
+        padding: 0 5%;
+    }
+
+    .Empleados-header h2 {
+        font-size: 2rem;
+    }
+
+    .Empleados-header p {
+        font-size: 1rem;
+    }
+}
+
