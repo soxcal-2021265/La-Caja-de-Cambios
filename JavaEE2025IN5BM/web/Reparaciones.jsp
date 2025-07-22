@@ -27,12 +27,12 @@
         </div>
         <nav>
             <ul>
-                <li><a href="MenuInicio.html">Inicio</a></li>
-                <li><a href="Servicio.html">Servicio</a></li>
-                <li><a href="Repuestos.html">Repuestos</a></li>
-                <li><a href="Accesorios.html">Accesorios</a></li>
-                <li><a href="LLantas.html">Llantas</a></li>
-                <li><a href="Mecanicos.html">Mecanicos</a></li>
+                <li><a href="MenuInicio.jsp">Inicio</a></li>
+                <li><a href="Servicio.jsp">Servicio</a></li>
+                <li><a href="Repuestos.jsp">Repuestos</a></li>
+                <li><a href="Accesorios.jsp">Accesorios</a></li>
+                <li><a href="LLantas.jsp">Llantas</a></li>
+                <li><a href="Mecanicos.jsp">Mecanicos</a></li>
             </ul>
         </nav>
     </header>
