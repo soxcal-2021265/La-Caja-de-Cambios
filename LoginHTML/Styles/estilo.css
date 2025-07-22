@@ -1116,3 +1116,407 @@ footer {
 }
 
 /* AQUI TERMINA EL CSS PARA LA PARTE DE SERVICIO*/
+
+/* AQUI COMIENZA LA PARTE DE REPUESTOS CSS*/
+.repuestos-header {
+    padding: 150px 15% 60px;
+    text-align: center;
+    background: url('../Images/repuestos-banner.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    margin-top: 60px;
+}
+
+.repuestos-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(31, 28, 44, 0.7);
+    z-index: 0;
+}
+
+.repuestos-header h2 {
+    position: relative;
+    z-index: 1;
+    font-size: 3rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: fadeInDown 1s ease-out;
+    color: #fff;
+}
+
+.repuestos-header p {
+    position: relative;
+    z-index: 1;
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    color: #ddd;
+    animation: fadeIn 1.5s ease-out 0.3s both;
+}
+
+/* Filtros de categoría */
+.category-filter {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px auto;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 1s ease-out 0.6s both;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+.filter-btn {
+    padding: 8px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    backdrop-filter: blur(5px);
+}
+
+.filter-btn:hover {
+    background: rgba(247, 45, 122, 0.3);
+    border-color: #f72d7a;
+}
+
+.filter-btn.active {
+    background: #f72d7a;
+    border-color: #f72d7a;
+    font-weight: 600;
+}
+
+/* Filtros avanzados */
+.filter-section {
+    background: rgba(31, 28, 44, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    margin: 40px auto;
+    max-width: 1200px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: fadeIn 1s ease-out;
+}
+
+.filter-title {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.filter-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: #f72d7a;
+}
+
+.filter-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.filter-group {
+    margin-bottom: 15px;
+}
+
+.filter-group label {
+    display: block;
+    color: #ddd;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.filter-group select, .filter-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.filter-group select:focus, .filter-group input:focus {
+    outline: none;
+    border-color: #f72d7a;
+    box-shadow: 0 0 0 2px rgba(247, 45, 122, 0.3);
+}
+
+.search-bar {
+    display: flex;
+    margin-bottom: 30px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px 0 0 30px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.search-bar input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.search-bar input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.search-bar button {
+    padding: 0 25px;
+    background: #f72d7a;
+    color: white;
+    border: none;
+    border-radius: 0 30px 30px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.search-bar button:hover {
+    background: #e0246a;
+}
+
+/* Grid de repuestos */
+.repuestos-grid {
+    padding: 60px 15%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.repuesto-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.repuesto-card:nth-child(1) { animation-delay: 0.2s; }
+.repuesto-card:nth-child(2) { animation-delay: 0.4s; }
+.repuesto-card:nth-child(3) { animation-delay: 0.6s; }
+.repuesto-card:nth-child(4) { animation-delay: 0.8s; }
+.repuesto-card:nth-child(5) { animation-delay: 1s; }
+.repuesto-card:nth-child(6) { animation-delay: 1.2s; }
+.repuesto-card:nth-child(7) { animation-delay: 1.4s; }
+.repuesto-card:nth-child(8) { animation-delay: 1.6s; }
+
+.repuesto-card:hover {
+    transform: translateY(-10px) !important;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    border-color: rgba(247, 45, 122, 0.5);
+}
+
+.repuesto-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.repuesto-card:hover .repuesto-img {
+    transform: scale(1.05);
+}
+
+.repuesto-info {
+    padding: 20px;
+}
+
+.repuesto-marca {
+    color: #f72d7a;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.repuesto-nombre {
+    font-size: 1.3rem;
+    color: white;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.repuesto-desc {
+    color: #ccc;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    min-height: 60px;
+}
+
+.repuesto-precio {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f72d7a;
+    margin-bottom: 20px;
+}
+
+.repuesto-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.view-details, .add-to-cart {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.view-details {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.view-details:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.add-to-cart {
+    background: #f72d7a;
+    color: white;
+}
+
+.add-to-cart:hover {
+    background: #e0246a;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Paginación */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 40px 0;
+}
+
+.page-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-btn:hover {
+    background: rgba(247, 45, 122, 0.3);
+}
+
+.page-btn.active {
+    background: #f72d7a;
+    border-color: #f72d7a;
+    font-weight: 600;
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive para repuestos */
+@media (max-width: 1200px) {
+    .repuestos-header, .repuestos-grid {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+}
+
+@media (max-width: 992px) {
+    .filter-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .repuestos-header, .repuestos-grid {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    
+    .repuestos-header h2 {
+        font-size: 2rem;
+    }
+    
+    .repuestos-header p {
+        font-size: 1rem;
+    }
+    
+    .repuestos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .filter-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .repuestos-header {
+        padding-top: 120px;
+        padding-bottom: 40px;
+    }
+    
+    .repuestos-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .repuesto-actions {
+        flex-direction: column;
+    }
+    
+    .view-details, .add-to-cart {
+        width: 100%;
+    }
+}
+
+/* AQUI TERMINA EL CSS PARA LA PARTE DE REPUESTOS*/
