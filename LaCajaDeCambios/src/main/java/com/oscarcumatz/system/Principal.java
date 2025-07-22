@@ -10,6 +10,10 @@ import com.oscarcumatz.dominio.Factura;
 import com.oscarcumatz.controller.FacturaController;
 import com.oscarcumatz.controller.ReparacionController;
 import com.oscarcumatz.controller.OrdenReparacionController;
+import com.oscarcumatz.controller.OrdenServicioController;
+import static com.oscarcumatz.controller.OrdenServicioController.menuOrdenServicio;
+import com.oscarcumatz.controller.ServicioController;
+import static com.oscarcumatz.controller.ServicioController.menuServicio;
 import java.util.Scanner;
 
 public class Principal {
@@ -39,6 +43,9 @@ public class Principal {
         FacturaController fcontroller = new FacturaController();
         ReparacionController rcontroller = new ReparacionController();
         OrdenReparacionController ocontroller = new OrdenReparacionController();
+        ServicioController scontroller = new ServicioController();
+        OrdenServicioController oscontroller = new OrdenServicioController();
+
                 int opcion;
                 do {
                     System.out.println("--------------------------");
@@ -74,8 +81,10 @@ public class Principal {
                         case 6:                       
                             break;
                         case 7:
+                            scontroller.menuServicio();
                             break;
                         case 8:
+                            oscontroller.menuOrdenServicio();
                             break;
                         case 9:
                         rcontroller.menuReparacion();
