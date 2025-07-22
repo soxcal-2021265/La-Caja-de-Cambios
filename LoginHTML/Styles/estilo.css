@@ -1813,3 +1813,257 @@ footer {
 }
 
 /* AQUI TERMINA EL CSS DE REPARACIONES*/
+
+/*AQUI INICIA EL CSS PARA LA PARTE DE ACCESORIOS */
+.accesorios-header {
+    padding: 150px 15% 60px;
+    text-align: center;
+    background: url('../Images/repuestos-banner.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    margin-top: 60px;
+}
+
+.accesorios-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(31, 28, 44, 0.7);
+    z-index: 0;
+}
+
+.accesorios-header h2 {
+    position: relative;
+    z-index: 1;
+    font-size: 3rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: fadeInDown 1s ease-out;
+    color: #fff;
+}
+
+.accesorios-header p {
+    position: relative;
+    z-index: 1;
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    color: #ddd;
+    animation: fadeIn 1.5s ease-out 0.3s both;
+}
+
+
+.accesorios-grid {
+    padding: 60px 15%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.accesorio-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.accesorio-card:nth-child(1) { animation-delay: 0.2s; }
+.accesorio-card:nth-child(2) { animation-delay: 0.4s; }
+.accesorio-card:nth-child(3) { animation-delay: 0.6s; }
+.accesorio-card:nth-child(4) { animation-delay: 0.8s; }
+.accesorio-card:nth-child(5) { animation-delay: 1s; }
+.accesorio-card:nth-child(6) { animation-delay: 1.2s; }
+.accesorio-card:nth-child(7) { animation-delay: 1.4s; }
+.accesorio-card:nth-child(8) { animation-delay: 1.6s; }
+
+.accesorio-card:hover {
+    transform: translateY(-10px) !important;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    border-color: rgba(247, 45, 122, 0.5);
+}
+
+.accesorio-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.accesorio-card:hover .accesorio-img {
+    transform: scale(1.05);
+}
+
+.accesorio-info {
+    padding: 20px;
+}
+
+.accesorio-nombre {
+    font-size: 1.3rem;
+    color: white;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.accesorio-desc {
+    color: #ccc;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    min-height: 60px;
+}
+
+.accesorio-precio {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f72d7a;
+    margin-bottom: 20px;
+}
+
+.accesorio-actions {
+    display: flex;
+    gap: 10px;
+}
+
+
+.main-footer {
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+
+  .footer-top-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #c62828;
+  }
+  
+
+  .footer-content {
+    max-width: 1300px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 40px 20px;
+    gap: 40px;
+  }
+  
+  .footer-section {
+    flex: 1;
+    min-width: 220px;
+  }
+  
+
+  .footer-logo {
+    width: 160px;
+    margin-bottom: 20px;
+  }
+  
+ 
+  .footer-section.about p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #ccc;
+  }
+  
+
+  .footer-section.links h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .footer-section.links ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-section.links li {
+    margin-bottom: 8px;
+  }
+  
+  .footer-section.links a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+  }
+  
+  .footer-section.links a:hover {
+    color: #c62828;
+  }
+  
+ 
+  .footer-section.horarios h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .footer-section.horarios ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-section.horarios li {
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #555;
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    color: #eee;
+  }
+  
+
+  .footer-section.contact-info h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    gap: 10px;
+  }
+  
+  .contact-item i {
+    color: #c62828;
+    font-size: 20px;
+    margin-top: 5px;
+  }
+  
+  .contact-item h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .contact-item p {
+    margin: 2px 0;
+    font-size: 15px;
+    color: #ccc;
+  }
+  
+  
+  .footer-bottom {
+    text-align: center;
+    padding: 15px 10px;
+    border-top: 1px solid #444;
+    font-size: 14px;
+    color: #bbb;
+  }
+/* AQUI TERMINA EL CSS PARA LA PARTE DE ACCESORIOS*/
