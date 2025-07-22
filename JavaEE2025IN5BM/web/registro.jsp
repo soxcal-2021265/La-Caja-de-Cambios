@@ -1,7 +1,7 @@
 <%-- 
-    Document   : index
-    Created on : 22 jul 2025, 10:17:10
-    Author     : informatica
+    Document   : registro
+    Created on : 22/07/2025, 16:35:53
+    Author     : Usuario
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,7 +20,7 @@
         Tu navegador no soporta videos HTML5.
     </video>
 
-   <header class="header">
+<header class="header">
   <div class="logo-container">
     <div class="logo">La Caja de cambios</div>
     <div class="logo_image">
@@ -28,9 +28,8 @@
     </div>
   </div>
   <nav class="navbar">
-    <a href="#">Inicio</a>
+    <a href="index.jsp">Inicio</a>
     <a href="#">Acerca de</a>
-    <a href="contactanos.html">Contactanos</a>
   </nav>
 </header>
 
@@ -52,26 +51,47 @@
                 </div>
             </div>
         </div>
-        <div class="login-section">
+          <div class="login-section">
             <div class="form-box login">
-                <form action="MenuInicio.jsp" method="post">
-                    <h2>Iniciar Sesion</h2>
+                <form action="">
+                    <h2>Registrarse</h2>
                     <div class="input-box">
-                        <span class="icon"><i class='bx bxs-envelope'></i></span>
-                        <input type="email" required>
-                        <label >Correo</label>
+                        <span class="icon"><i class='bx bxs-user'></i></span>
+                        <input type="text" required>
+                        <label>Nombre de Usuario</label>
+                    </div>
+                   
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-phone'></i></span>
+                        <input type="tel" required>
+                        <label>Telefono Cliente</label>
                     </div>
                     <div class="input-box">
-                        <span class="icon"><i class='bx bxs-lock-alt' ></i></span>
+                        <span class="icon"><i class='bx bxs-map'></i></span>
+                        <input type="text" required>
+                        <label>Dirección</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-map'></i></span>
+                        <input type="email" required>
+                        <label>Correo</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-lock-alt'></i></span>
                         <input type="password" required>
                         <label>Contraseña</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-lock-alt'></i></span>
+                        <input type="password" required>
+                        <label>Confirmar Contraseña</label>
                     </div>
                     <div class="remember-password">
                         <label for=""><input type="checkbox">Ver contraseña</label>
                     </div>
-                    <button class="btn">Iniciar sesión</button>
+                    <button class="btn">Registrarse</button>
                     <div class="create-account">
-                        <p>¿Crear una nueva cuenta? <a href="registro.jsp" class="register-link">Registrarse</a></p>
+                        <p>¿Ya tienes Cuenta? <a href="index.jsp" class="register-link">Iniciar Sesion</a></p>
                     </div>
                 </form>
             </div>
