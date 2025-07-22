@@ -1,0 +1,9 @@
+com\oscarcumatz\controller\FacturaController.class
+com\oscarcumatz\dominio\Auto.class
+com\oscarcumatz\dominio\Factura$MetodoPago.class
+com\oscarcumatz\dominio\Cliente_.class
+com\oscarcumatz\dominio\Factura.class
+com\oscarcumatz\dominio\Factura_.class
+com\oscarcumatz\system\Principal.class
+com\oscarcumatz\dominio\Cliente.class
+com\oscarcumatz\dominio\Auto_.class
