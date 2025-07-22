@@ -48,6 +48,8 @@
     margin-right: 30px;
     font-weight: 500;
     text-decoration: none;
+    transform: translateX(-100); /* mueve todo el bloque hacia la izquierda */
+    padding-right: 80px;
 }
  
 .navbar a::after {
@@ -225,7 +227,7 @@ position: fixed;
     left: 0;
     width: 100%;
     padding: 15%;
-    background: transparent;
+    background: black;
     display: flex;
     justify-content: space-between;
     align-items: center;
