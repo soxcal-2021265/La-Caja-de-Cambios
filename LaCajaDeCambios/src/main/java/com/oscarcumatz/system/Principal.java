@@ -7,6 +7,7 @@ import com.oscarcumatz.dominio.Auto;
 import java.util.List;
 import javax.persistence.TypedQuery;
 import com.oscarcumatz.dominio.Factura;
+import com.oscarcumatz.controller.LlantaController;
 import com.oscarcumatz.controller.FacturaController;
 import com.oscarcumatz.controller.ReparacionController;
 import com.oscarcumatz.controller.OrdenReparacionController;
@@ -52,6 +53,7 @@ public class Principal {
         RepuestoController repcontroller = new RepuestoController(); 
         AccesorioController acontroller = new AccesorioController();
         EmpleadoController econtroller = new EmpleadoController();
+        LlantaController llcontroller = new LlantaController();
         
                 int opcion;
                 do {
@@ -82,7 +84,8 @@ public class Principal {
                             break;
                         case 3:
                             break;
-                        case 4:                           
+                        case 4:  
+                            llcontroller.menuLlanta();
                             break;
                         case 5: 
                             repcontroller.menuRepuesto();
