@@ -30,7 +30,7 @@
   <nav class="navbar">
     <a href="#">Inicio</a>
     <a href="contactanos.jsp">Acerca de</a>
-    <a href="contactanos.html">Contactanos</a>
+    <a href="contactanos.jsp">Contactanos</a>
   </nav>
 </header>
 
