@@ -17,6 +17,7 @@ import com.oscarcumatz.controller.RepuestoController;
 import static com.oscarcumatz.controller.RepuestoController.menuRepuesto;
 import com.oscarcumatz.controller.ServicioController;
 import static com.oscarcumatz.controller.ServicioController.menuServicio;
+import com.oscarcumatz.controller.DetalleFacturaController;
 import java.util.Scanner;
 import com.oscarcumatz.controller.AccesorioController;
 import com.oscarcumatz.controller.EmpleadoController;
@@ -54,6 +55,7 @@ public class Principal {
         AccesorioController acontroller = new AccesorioController();
         EmpleadoController econtroller = new EmpleadoController();
         LlantaController llcontroller = new LlantaController();
+        DetalleFacturaController dfcontroller = new DetalleFacturaController();
         
                 int opcion;
                 do {
@@ -109,6 +111,7 @@ public class Principal {
                         fcontroller.menuFactura();      
                             break;
                         case 12:
+                            dfcontroller.menuDetalleFactura();
                             break;          
                         case 0:
                             System.out.println("-- Saliendo --");         
