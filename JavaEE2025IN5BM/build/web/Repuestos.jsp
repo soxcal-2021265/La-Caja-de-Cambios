@@ -1,6 +1,10 @@
 <%-- 
     Document   : Repuestos
+<<<<<<< HEAD
     Created on : 22 jul 2025, 19:12:48
+=======
+    Created on : 22 jul 2025, 18:41:01
+>>>>>>> 8d55f6cf5553b6350ae8dddb9031438849c41c65
     Author     : VictorHugo
 --%>
 
