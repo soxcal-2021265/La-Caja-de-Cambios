@@ -21,6 +21,8 @@ import com.oscarcumatz.controller.DetalleFacturaController;
 import java.util.Scanner;
 import com.oscarcumatz.controller.AccesorioController;
 import com.oscarcumatz.controller.EmpleadoController;
+import com.oscarcumatz.controller.AutoController;
+import com.oscarcumatz.controller.ClienteController;
 
 public class Principal {
         private static final Scanner leer = new Scanner(System.in);
@@ -56,6 +58,8 @@ public class Principal {
         EmpleadoController econtroller = new EmpleadoController();
         LlantaController llcontroller = new LlantaController();
         DetalleFacturaController dfcontroller = new DetalleFacturaController();
+        ClienteController clcontroller = new ClienteController();
+        AutoController aucontroller = new AutoController();
         
                 int opcion;
                 do {
@@ -82,9 +86,11 @@ public class Principal {
                         case 1:     
                             econtroller.menuEmpleado();
                             break;
-                        case 2:                         
+                        case 2:                 
+                            clcontroller.menuCliente();
                             break;
                         case 3:
+                            aucontroller.menuAuto();
                             break;
                         case 4:  
                             llcontroller.menuLlanta();
