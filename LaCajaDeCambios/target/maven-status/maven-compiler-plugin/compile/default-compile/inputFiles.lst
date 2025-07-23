@@ -5,6 +5,8 @@ C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\dominio\Orde
 C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\controller\FacturaController.java
 C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\dominio\Auto.java
 C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\controller\RepuestoController.java
+C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\controller\LlantaController.java
+C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\dominio\DetalleFactura.java
 C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\controller\ReparacionController.java
 C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\controller\OrdenReparacionController.java
 C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\dominio\Factura.java
@@ -12,8 +14,10 @@ C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\dominio\Clie
 C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\controller\OrdenServicioController.java
 C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\dominio\Servicio.java
 C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\controller\EmpleadoController.java
+C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\controller\DetalleFacturaController.java
 C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\dominio\Accesorios.java
 C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\dominio\Repuesto.java
 C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\system\Principal.java
 C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\controller\AccesorioController.java
 C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\dominio\Reparacion.java
+C:\La-Caja-de-Cambios\LaCajaDeCambios\src\main\java\com\oscarcumatz\dominio\Llanta.java
