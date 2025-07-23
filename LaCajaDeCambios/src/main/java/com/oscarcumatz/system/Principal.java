@@ -18,6 +18,7 @@ import com.oscarcumatz.controller.ServicioController;
 import static com.oscarcumatz.controller.ServicioController.menuServicio;
 import java.util.Scanner;
 import com.oscarcumatz.controller.AccesorioController;
+import com.oscarcumatz.controller.EmpleadoController;
 
 public class Principal {
         private static final Scanner leer = new Scanner(System.in);
@@ -50,6 +51,7 @@ public class Principal {
         OrdenServicioController oscontroller = new OrdenServicioController();
         RepuestoController repcontroller = new RepuestoController(); 
         AccesorioController acontroller = new AccesorioController();
+        EmpleadoController econtroller = new EmpleadoController();
         
                 int opcion;
                 do {
@@ -73,7 +75,8 @@ public class Principal {
                     leer.nextLine();
 
                     switch (opcion) {
-                        case 1:                            
+                        case 1:     
+                            econtroller.menuEmpleado();
                             break;
                         case 2:                         
                             break;

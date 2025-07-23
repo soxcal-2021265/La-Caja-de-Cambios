@@ -7,6 +7,7 @@ com\oscarcumatz\system\Principal.class
 com\oscarcumatz\dominio\Servicio_.class
 com\oscarcumatz\controller\ReparacionController.class
 com\oscarcumatz\dominio\Reparacion.class
+com\oscarcumatz\dominio\Empleado$puesto.class
 com\oscarcumatz\controller\ServicioController.class
 com\oscarcumatz\controller\OrdenServicioController.class
 com\oscarcumatz\controller\RepuestoController.class
@@ -15,6 +16,8 @@ com\oscarcumatz\dominio\Cliente.class
 com\oscarcumatz\dominio\Auto_.class
 com\oscarcumatz\dominio\OrdenReparacion$Estado.class
 com\oscarcumatz\dominio\OrdenServicio$EstadoOrden.class
+com\oscarcumatz\controller\EmpleadoController.class
+com\oscarcumatz\dominio\Empleado.class
 com\oscarcumatz\dominio\Factura$MetodoPago.class
 com\oscarcumatz\dominio\Repuesto.class
 com\oscarcumatz\dominio\OrdenReparacion_.class
@@ -25,6 +28,7 @@ com\oscarcumatz\dominio\Repuesto$EstadoRepuesto.class
 com\oscarcumatz\controller\AccesorioController.class
 com\oscarcumatz\dominio\OrdenReparacion.class
 com\oscarcumatz\dominio\Cliente_.class
+com\oscarcumatz\dominio\Empleado_.class
 com\oscarcumatz\dominio\Factura.class
 com\oscarcumatz\dominio\Repuesto_.class
 com\oscarcumatz\controller\OrdenReparacionController.class
