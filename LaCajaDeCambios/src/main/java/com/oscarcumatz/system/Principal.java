@@ -12,6 +12,8 @@ import com.oscarcumatz.controller.ReparacionController;
 import com.oscarcumatz.controller.OrdenReparacionController;
 import com.oscarcumatz.controller.OrdenServicioController;
 import static com.oscarcumatz.controller.OrdenServicioController.menuOrdenServicio;
+import com.oscarcumatz.controller.RepuestoController;
+import static com.oscarcumatz.controller.RepuestoController.menuRepuesto;
 import com.oscarcumatz.controller.ServicioController;
 import static com.oscarcumatz.controller.ServicioController.menuServicio;
 import java.util.Scanner;
@@ -45,7 +47,7 @@ public class Principal {
         OrdenReparacionController ocontroller = new OrdenReparacionController();
         ServicioController scontroller = new ServicioController();
         OrdenServicioController oscontroller = new OrdenServicioController();
-
+        RepuestoController repcontroller = new RepuestoController(); 
                 int opcion;
                 do {
                     System.out.println("--------------------------");
@@ -56,7 +58,7 @@ public class Principal {
                     System.out.println("3.Autos");
                     System.out.println("4.Llantas");
                     System.out.println("5.Repuestos");
-                    System.out.println("5.Accesorios");
+                    System.out.println("6.Accesorios");
                     System.out.println("7.Servicios");
                     System.out.println("8.Orden de servicios");
                     System.out.println("9.Reparaciones");
@@ -76,7 +78,8 @@ public class Principal {
                             break;
                         case 4:                           
                             break;
-                        case 5:                             
+                        case 5: 
+                            repcontroller.menuRepuesto();
                             break;
                         case 6:                       
                             break;
