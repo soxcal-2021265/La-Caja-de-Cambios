@@ -29,7 +29,7 @@
   </div>
   <nav class="navbar">
     <a href="#">Inicio</a>
-    <a href="#">Acerca de</a>
+    <a href="contactanos.jsp">Acerca de</a>
     <a href="contactanos.html">Contactanos</a>
   </nav>
 </header>
