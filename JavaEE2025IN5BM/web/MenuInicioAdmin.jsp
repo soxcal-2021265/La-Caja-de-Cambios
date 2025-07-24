@@ -128,7 +128,7 @@
             <img src="Images/serviciosbanner.jpg" alt="Diagnóstico computarizado" class="service-img">
             <h3>Servicios</h3>
             <p class="service-description">Procesos de servicios y orden servicios</p>
-            <a href="ServiciosAdmin.jsp">
+            <a href="ServicioAdmin.jsp">
                 <button class="service-btn view-details">Ingresar</button>
             </a>
         </div>
