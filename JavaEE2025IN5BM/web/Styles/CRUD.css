@@ -167,7 +167,24 @@ button:hover {
     background-color: #e0246a;
     transform: translateY(-2px);
 }
+select {
+    width: 100%;
+    padding: 0.9rem;
+    background: #2b2a38;
+    color: #fff;
+    border: 2px solid #f72d7a;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
 
+select:hover {
+    border-color: #e0246a;
+    background: #38374a;
+}
 /* Tabla de registros */
 .tabla-registros {
     flex: 2;
