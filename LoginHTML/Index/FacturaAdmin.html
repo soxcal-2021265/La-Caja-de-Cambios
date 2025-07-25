@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="../Styles/CRUD.css" />
-    <title>CRUD Factura</title>
+    <link rel="icon" href="../Images/logo.png" type="image/png">
+    <title>Administracion de factura</title>
 </head>
 <body>
     
@@ -51,26 +52,28 @@
             <div class="formulario">
                 <h2>Agregar / Modificar Factura</h2>
                 <form>
-                    <label for="numero-factura">No. Factura</label>
-                    <input type="text" id="numero-factura" placeholder="Ej: 1020" />
+                    <label for="codigoFactura">No. Factura</label>
+                    <input type="text" id="codigoFactura" placeholder="Ej: 1020" />
 
-                    <label for="numero-cliente">Cliente</label>
-                    <input type="text" id="numero-cliente" placeholder="Nombre del cliente" />
+                    <label for="codigoClienteFactura">Cliente</label>
+                    <input type="text" id="codigoClienteFactura" placeholder="Nombre del cliente" />
 
-                    <label for="numero-empleado">Empleado</label>
-                    <input type="text" id="numero-empleado" placeholder="Empleado a cargo" />
+                    <label for="codigoEmpleadoFactura">Empleado</label>
+                    <input type="text" id="codigoEmpleadoFactura" placeholder="Empleado a cargo" />
 
-                    <label for="numero-automovil">Automóvil</label>
-                    <input type="text" id="numero-automovil" placeholder="Vehículo" />
+                    <label for="codigoAutoFactura">Automóvil</label>
+                    <input type="text" id="codigoAutoFactura" placeholder="Vehículo" />
 
-                    <label for="numero-gasto">Tipo de gasto</label>
-                    <input type="text" id="numero-gasto" placeholder="Servicio, Repuesto, etc." />
+                    <label for="fechaEmision">Fecha de emision</label>
+                    <input type="text" id="fechaEmision" placeholder="yyyy/mm/dd" />
 
-                    <label for="numero-cantidad">Cantidad</label>
-                    <input type="number" id="numero-cantidad" placeholder="Ej: 2" />
+                    <label for="metodoPago">Metodo de pago</label>
+                    <select id="metodoPago">
+                        <option value="Efectivo">Effectivo</option>
+                        <option value="Targeta">Targeta</option>
+                    </select>
 
-                    <label for="numero-precio">Precio</label>
-                    <input type="number" id="numero-precio" placeholder="Q0.00" />
+                    
 
                     <button type="submit">Guardar</button>
                 </form>
@@ -83,23 +86,23 @@
                     <thead>
                         <tr>
                             <th>No.Factura</th>
-                            <th>Cliente</th>
-                            <th>Empleado</th>
-                            <th>Auto</th>
-                            <th>Gasto</th>
-                            <th>Cant.</th>
-                            <th>Precio</th>
+                            <th>No.Cliente</th>
+                            <th>No.Empleado</th>
+                            <th>No.Auto</th>
+                            <th>Fecha de emisión</th>
+                            <th>Total</th>
+                            <th>Metodo de pago</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1010</td>
+                            <td>1</td>
                             <td>Oscar</td>
                             <td>Alejandro</td>
                             <td>2</td>
-                            <td>Servicio</td>
-                            <td>2</td>
-                            <td>Q20.00</td>
+                            <td>2025/12/12</td>
+                            <td>Q330.00</td>
+                            <td>Targeta</td>
                         </tr>
                         <!-- Más registros aquí -->
                     </tbody>
