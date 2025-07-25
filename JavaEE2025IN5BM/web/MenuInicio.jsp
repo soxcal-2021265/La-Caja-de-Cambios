@@ -75,13 +75,14 @@
 <div class="navMenu">
       <nav class="navbar">
       <a href="index.jsp">Inicio</a>
-      <a href="AcercaDe.jsp">Quienes Somos</a>
+      <a href="acercade.jsp">Quienes Somos</a>
       <a href="Servicio.jsp">Servicios</a>
       <a href="Mecanicos.jsp">Mecanicos</a>
       <a href="LLantas.jsp">Llantas</a>
       <a href="Repuestos.jsp">Respuestos</a>
       <a href="Accesorios.jsp">Accesorios</a>
       <a href="Reparaciones.jsp">Reparaciones</a>
+      <a href="acercade.jsp">Sobre nosotros</a>
     </nav>
 </div>
     </div>
