@@ -65,6 +65,20 @@
           <span>19 Calle 2‑47 Zona 3<br>Ciudad Guatemala</span>
         </div>
       </div>
+      <div class="contact-item user-icon-wrapper" onclick="mostrarUsuario()">
+        <i class='bx bx-user-circle'></i>
+        <div>
+          <h4>Mi cuenta</h4>
+          <span class="perfil">Perfil</span>
+        </div>
+        <div class="user-menu" id="userMenu">
+          <img src="../Images/ususario.png" class="user-avatar" alt="Avatar">
+          <p class="user-name">EjemploUsuario</p>
+          <p class="user-email">ejemploUsuario@gmail.com</p>
+          <button id="buttonUsuario">Cambiar cuenta</button>
+          <button id="buttonUsuario">Cerrar Sesión</button>
+        </div>
+      </div>
 <div class="navMenu">
       <nav class="navbar">
       <a href="index.html">Inicio</a>
@@ -219,5 +233,18 @@
 </section>
 
 </body>
+  <script>
+    function mostrarUsuario() {
+      const menu = document.getElementById("userMenu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
 
+    window.addEventListener("click", function (e) {
+      const menu = document.getElementById("userMenu");
+      const icon = document.querySelector(".user-icon-wrapper");
+      if (!icon.contains(e.target)) {
+        menu.style.display = "none";
+      }
+    });
+  </script>
 </html>
