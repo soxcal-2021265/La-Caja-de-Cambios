@@ -82,7 +82,7 @@
       <a href="Repuestos.jsp">Respuestos</a>
       <a href="Accesorios.jsp">Accesorios</a>
       <a href="Reparaciones.jsp">Reparaciones</a>
-      <a href="acercade.jsp">Sobre nosotros</a>
+      <a href="registroCompra.jsp">Compras</a>
     </nav>
 </div>
     </div>
