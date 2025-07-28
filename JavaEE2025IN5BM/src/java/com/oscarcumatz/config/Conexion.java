@@ -10,7 +10,7 @@ import java.sql.SQLException;
     public Connection Conexion(){
         try {
             Class.forName("com.mysql.jdbc.Drive");
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/DB_Taller?useSSL=false", "root", "2021019");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/DB_Taller?useSSL=false", "root", "admin");
         } catch(ClassNotFoundException | SQLException e){
         }
         return conexion;
