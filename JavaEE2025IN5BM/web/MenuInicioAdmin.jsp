@@ -94,7 +94,7 @@
                     <img src="Images/mecanicosbannerxd.jpg" alt="Cambio de aceite" class="service-img">
                     <h3>Empleados</h3>
                     <p class="service-description">Mecanicos y recepcionistas presentes en el taller</p>            
-                    <a href="EmpleadosAdmin.jsp">
+                    <a href="MecanicosAdmin.jsp">
                         <button class="service-btn view-details">Ingresar</button>
                     </a>
                 </div>
