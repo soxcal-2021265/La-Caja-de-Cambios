@@ -110,7 +110,7 @@
                     <img src="Images/autosbanner.jpg" alt="Diagnóstico computarizado" class="service-img">
                     <h3>Autos</h3>
                     <p class="service-description">Autos ingresados por los clientes para realizar servicios y reparaciones</p>
-                    <a href="AutosAdmin.html">
+                    <a href="AutosAdmin.jsp">
                         <button class="service-btn view-details">Ingresar</button>
                     </a>
                 </div>
