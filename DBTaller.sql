@@ -197,13 +197,13 @@ DELIMITER ;
 
 CALL sp_AgregarEmpleado('Camila', '33727865', 'camila@gmail.com', 'Zona 8', 'Recepcionista');
 CALL sp_AgregarEmpleado('Luis', '44928374', 'luis@gmail.com', 'Zona 1', 'Mecanico');
-CALL sp_AgregarEmpleado('Andrea', '32018745', 'andrea@gmail.com', 'Zona 7', 'Recepcionista');
+CALL sp_AgregarEmpleado('Sebastian', '32018745', 'Sebastiana@gmail.com', 'Zona 7', 'Mecanico');
 CALL sp_AgregarEmpleado('Carlos', '55429873', 'carlos@gmail.com', 'Zona 2', 'Mecanico');
-CALL sp_AgregarEmpleado('Paola', '33098745', 'paola@gmail.com', 'Zona 5', 'Recepcionista');
+CALL sp_AgregarEmpleado('Pablo', '33098745', 'pablo@gmail.com', 'Zona 5', 'Mecanico');
 CALL sp_AgregarEmpleado('Jorge', '44982736', 'jorge@gmail.com', 'Zona 4', 'Mecanico');
-CALL sp_AgregarEmpleado('María', '30129873', 'maria@gmail.com', 'Zona 9', 'Recepcionista');
+CALL sp_AgregarEmpleado('Maríano', '30129873', 'mariano@gmail.com', 'Zona 9', 'Mecanico');
 CALL sp_AgregarEmpleado('Pedro', '44990123', 'pedro@gmail.com', 'Zona 2', 'Mecanico');
-CALL sp_AgregarEmpleado('Lucía', '33724567', 'lucia@gmail.com', 'Zona 6', 'Recepcionista');
+CALL sp_AgregarEmpleado('Lucas', '33724567', 'lucas@gmail.com', 'Zona 6', 'Mecanico');
 CALL sp_AgregarEmpleado('José', '55890123', 'jose@gmail.com', 'Zona 10', 'Mecanico');
 CALL sp_AgregarEmpleado('Mario', '66338542', 'mario@gmail.com', 'Zona 11', 'Mecanico');
 
