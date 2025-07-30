@@ -71,6 +71,9 @@
 
                     <label for="direccionCliente">Dirección</label>
                     <input type="text" id="direccionCliente" placeholder="Dirección del cliente" />
+                    
+                    <label for="direccionCliente">Contraseña</label>
+                    <input type="text" id="contraseñaCliente" placeholder="Contraseña del cliente" />
 
                     <button type="submit">Guardar</button>
                 </form>
@@ -87,6 +90,7 @@
                             <th>Teléfono</th>
                             <th>Correo</th>
                             <th>Dirección</th>
+                            <th>Contraseña</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -96,6 +100,7 @@
                             <td>12345678</td>
                             <td>ana.lopez@gmail.com</td>
                             <td>Zona 1</td>
+                            <td>maxQuinto</td>
                         </tr>
                     </tbody>
                 </table>
