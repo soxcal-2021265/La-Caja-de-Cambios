@@ -20,6 +20,7 @@ create table Cliente(
     telefonoCliente varchar(8)not null unique,
     correoCliente varchar(250) not null unique,
     direccion varchar(250),
+    contrasena varchar(250),
     primary key PK_codigoCliente(codigoCliente)
 );
 -- AUTO
@@ -32,7 +33,7 @@ create table Auto(
     color varchar(250),
     primary key PK_codigoAuto (codigoAuto),
     constraint FK_Auto_Cliente foreign key (codigoCliente)
-		references Cliente (codigoCliente)
+		references Cliente (codigoCliente)on delete cascade
 );
 
 create table Llanta(
@@ -87,13 +88,13 @@ create table OrdenServicio(
     estado enum("Pendiente","En proceso","Finalizado"),
     primary key PK_codigoOrdenServicio(codigoOrdenServicio),
     constraint FK_ordenServicio_Auto foreign key(codigoAuto)
-		references Auto(codigoAuto),
+		references Auto(codigoAuto)on delete cascade,
 	constraint FK_ordenServicio_Cliente foreign key(codigoCliente)
-		references Cliente(codigoCliente),
+		references Cliente(codigoCliente)on delete cascade,
 	constraint FK_ordenServicio_Empleado foreign key(codigoEmpleado)
-		references Empleado(codigoEmpleado),
+		references Empleado(codigoEmpleado)on delete cascade,
 	constraint FK_ordenServicio_Servicio foreign key(codigoServicio)
-		references Servicio(codigoServicio)
+		references Servicio(codigoServicio)on delete cascade
 );
 -- Reparacion /cambios de piesas
 create table Reparacion(
@@ -115,13 +116,13 @@ create table OrdenReparacion(
     estadoReparacion enum("Pendiente","En proceso","Finalizado"),
     primary key PK_codigoOrdenReparacion(codigoOrdenReparacion),
     constraint FK_ordenReparacion_Auto foreign key(codigoAutoReparacion)
-		references Auto(codigoAuto),
+		references Auto(codigoAuto)on delete cascade,
 	constraint FK_ordenReparacion_Cliente foreign key(codigoClienteReparacion)
-		references Cliente(codigoCliente),
+		references Cliente(codigoCliente)on delete cascade,
 	constraint FK_ordenReparacion_Empleado foreign key(codigoEmpleadoReparacion)
-		references Empleado(codigoEmpleado),
+		references Empleado(codigoEmpleado)on delete cascade,
 	constraint FK_ordenReparacion_Reparacion foreign key(codigoReparacion)
-		references Reparacion(codigoReparacion)
+		references Reparacion(codigoReparacion)on delete cascade
 );		
 
 -- factura
@@ -259,11 +260,10 @@ CALL sp_EditarEmpleado(4, 'Robereto', '44998877', 'roberto@gmail.com', 'Zona 10'
 
 -- PROCEDIMIENTOS ALMACENADOS
 -- CLIENTE
-
 delimiter //
 create procedure sp_ListarCliente()
 begin
-	select codigoCliente, nombreCliente, telefonoCliente, correoCliente, direccion from Cliente;
+	select codigoCliente, nombreCliente, telefonoCliente, correoCliente, direccion, contrasena from Cliente;
 end //
 delimiter ;
 call sp_ListarCliente();
@@ -273,24 +273,25 @@ create procedure sp_AgregarCliente(
 	in nCliente varchar(250),
     in tCliente char(8),
     in cCliente varchar(250),
-    in dCliente varchar(250)
+    in dCliente varchar(250),
+    in conCliente varchar(250)
     )
 begin
-	insert into Cliente(nombreCliente, telefonoCliente, correoCliente, direccion)
-    values (nCliente, tCliente, cCliente, dCliente);
+	insert into Cliente(nombreCliente, telefonoCliente, correoCliente, direccion, contrasena)
+    values (nCliente, tCliente, cCliente, dCliente, conCliente);
 end //
 delimiter ;
-call sp_AgregarCliente('Ana López','12345678','ana.lopez@gmail.com','Zona 1');
-call sp_AgregarCliente('Carlos Méndez','23456789','carlos.m@gmail.com','Zona 2');
-call sp_AgregarCliente('Lucía Torres','34567890','lucia.t@gmail.com','Zona 3');
-call sp_AgregarCliente('Mario Ruiz','45678901','mario.r@gmail.com','Zona 4');
-call sp_AgregarCliente('Sandra Díaz','56789012','sandra.d@gmail.com','Zona 5');
-call sp_AgregarCliente('José Ramírez','67890123','jose.r@gmail.com','Zona 6');
-call sp_AgregarCliente('Paola Soto','78901234','paola.s@gmail.com','Zona 7');
-call sp_AgregarCliente('Luis Castillo','89012345','luis.c@gmail.com','Zona 8');
-call sp_AgregarCliente('Diana Pérez','90123456','diana.p@gmail.com','Zona 9');
-call sp_AgregarCliente('Héctor Gómez','10234567','hector.g@gmail.com','Zona 10');
-call sp_AgregarCliente('Andrea Cruz','11234567','andrea.c@gmail.com','Zona 11');
+call sp_AgregarCliente('Ana López','12345678','ana.lopez@gmail.com','Zona 1', 'maxQuinto');
+call sp_AgregarCliente('Carlos Méndez','23456789','carlos.m@gmail.com','Zona 2', 'aquiSiFolgar');
+call sp_AgregarCliente('Lucía Torres','34567890','lucia.t@gmail.com','Zona 3', 'ArochaCalculadora');
+call sp_AgregarCliente('Mario Ruiz','45678901','mario.r@gmail.com','Zona 4', 'Mbappe123');
+call sp_AgregarCliente('Sandra Díaz','56789012','sandra.d@gmail.com','Zona 5', 'TortugaNinja');
+call sp_AgregarCliente('José Ramírez','67890123','jose.r@gmail.com','Zona 6', 'clckk');
+call sp_AgregarCliente('Paola Soto','78901234','paola.s@gmail.com','Zona 7', 'tralalero tralala');
+call sp_AgregarCliente('Luis Castillo','89012345','luis.c@gmail.com','Zona 8', 'sipirili');
+call sp_AgregarCliente('Diana Pérez','90123456','diana.p@gmail.com','Zona 9', 'noporolo');
+call sp_AgregarCliente('Héctor Gómez','10234567','hector.g@gmail.com','Zona 10', 'terreneitor');
+call sp_AgregarCliente('Andrea Cruz','11234567','andrea.c@gmail.com','Zona 11', 'chavito');
 
 delimiter //
 create procedure sp_EliminarCliente(in cCliente int)
@@ -306,29 +307,49 @@ create procedure sp_ModificarCliente(
     in nCliente varchar(250),
     in tCliente char(8),
     in coCliente varchar(250),
-    in dCliente varchar(250)
+    in dCliente varchar(250),
+    in conCliente varchar(250)
 )
 begin
 	update Cliente
     set nombreCliente = nCliente,
 		telefonoCliente = tCliente,
         correoCliente = coCliente,
-        direccion = dCliente
+        direccion = dCliente,
+        contrasena = conCliente
 	where codigoCliente = cCliente;
 end //
 delimiter ;
--- call sp_ModificarCliente(1, 'Andre', 12123123, 'asdasd@gmail.com', 'zona 1');
+-- call sp_ModificarCliente(1, 'Andre', 12123123, 'asdasd@gmail.com', 'zona 1', 'maxQuinto');
 
 delimiter //
 create procedure sp_BuscarCliente(in cCliente int)
 begin
-	select codigoCliente, nombreCliente, telefonoCliente, correoCliente, direccion from Cliente
+	select codigoCliente, nombreCliente, telefonoCliente, correoCliente, direccion, contrasena from Cliente
     where codigoCliente = cCliente;
 end //
 delimiter ;
 -- call sp_BuscarCliente(1);
+-- VALIDACION DE CLIENTE PARA USUARIO
+DELIMITER $$
+create procedure sp_validarCliente(in userr varchar(100), in pass blob)
+	begin
+		select codigoCliente, nombreCliente, telefonoCliente, correoCliente, direccion, contrasena from Cliente
+			where nombreCliente = userr and contrasena = pass;
+    end$$
+DELIMITER ;
+call sp_validarCliente("Ana López","maxQuinto");
 
-
+DELIMITER $$
+create procedure sp_NoDuplicarCliente(
+    in username varchar(20)
+)
+begin
+    select codigoCliente, nombreCliente, telefonoCliente, correoCliente, direccion, contrasena from Cliente
+    where nombreCliente = username;
+end$$
+DELIMITER ;
+call sp_NoDuplicarCliente("Ana López");
 -- AUTO
 delimiter //
 create procedure sp_ListarAuto()
