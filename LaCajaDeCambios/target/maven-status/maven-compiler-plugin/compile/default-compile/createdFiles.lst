@@ -7,6 +7,7 @@ com\oscarcumatz\dominio\DetalleFactura$TipoGasto.class
 com\oscarcumatz\dominio\Factura_.class
 com\oscarcumatz\dominio\Llanta.class
 com\oscarcumatz\dominio\Accesorios.class
+com\oscarcumatz\dominio\DetalleFactura_.class
 com\oscarcumatz\system\Principal.class
 com\oscarcumatz\dominio\Servicio_.class
 com\oscarcumatz\controller\ReparacionController.class

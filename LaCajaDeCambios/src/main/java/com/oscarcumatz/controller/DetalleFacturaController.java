@@ -1,5 +1,7 @@
 package com.oscarcumatz.controller;
 
+import com.oscarcumatz.dominio.DetalleFactura;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Scanner;
@@ -44,6 +46,7 @@ public class DetalleFacturaController {
         } while (opcion != 6);
     }
 
+    // Agregar Detalle
     public static void agregarDetalleFactura() {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -52,7 +55,8 @@ public class DetalleFacturaController {
         int codigoFactura = leer.nextInt();
         leer.nextLine();
         System.out.print("Tipo de Gasto (Servicio/Reparacion/Llanta/Repuesto/Accesorio): ");
-        String tipoGasto = leer.nextLine();
+        String tipoGastoStr = leer.nextLine();
+        DetalleFactura.TipoGasto tipoGasto = DetalleFactura.TipoGasto.valueOf(tipoGastoStr);
         System.out.print("Código de Gasto: ");
         int codigoGasto = leer.nextInt();
         System.out.print("Cantidad: ");
@@ -60,12 +64,8 @@ public class DetalleFacturaController {
 
         try {
             tx.begin();
-            Query query = em.createNativeQuery("CALL sp_AgregarDetalleFactura(?, ?, ?, ?)");
-            query.setParameter(1, codigoFactura);
-            query.setParameter(2, tipoGasto);
-            query.setParameter(3, codigoGasto);
-            query.setParameter(4, cantidad);
-            query.executeUpdate();
+            DetalleFactura detalle = new DetalleFactura(0, codigoFactura, tipoGasto, codigoGasto, cantidad);
+            em.persist(detalle); // Agregar el detalle
             tx.commit();
             System.out.println("Detalle de factura agregado correctamente.");
         } catch (Exception e) {
@@ -76,39 +76,40 @@ public class DetalleFacturaController {
         }
     }
 
+    // Listar todos los Detalles de Factura
     public static void listarDetallesFactura() {
         EntityManager em = emf.createEntityManager();
         try {
-            List<Object[]> detalles = em.createNativeQuery("CALL sp_MostrarDetallesFactura()").getResultList();
+            TypedQuery<DetalleFactura> query = em.createQuery("SELECT d FROM DetalleFactura d", DetalleFactura.class);
+            List<DetalleFactura> detalles = query.getResultList();
             System.out.println("\n*** Lista de Detalles de Factura ***");
-            for (Object[] detalle : detalles) {
-                System.out.println("Código Detalle: " + detalle[0] + ", Factura: " + detalle[1] + ", Tipo: " + detalle[2] + ", Gasto: " + detalle[3] + ", Cantidad: " + detalle[4]);
+            for (DetalleFactura detalle : detalles) {
+                System.out.println(detalle);
             }
         } finally {
             em.close();
         }
     }
 
+    // Buscar un Detalle por código
     public static void buscarDetalleFactura() {
         EntityManager em = emf.createEntityManager();
         System.out.print("Ingrese el código del detalle a buscar: ");
         int codigoDetalle = leer.nextInt();
 
         try {
-            Query query = em.createNativeQuery("CALL sp_BuscarDetalleFactura(?)");
-            query.setParameter(1, codigoDetalle);
-            List<Object[]> result = query.getResultList();
-            if (result.isEmpty()) {
+            DetalleFactura detalle = em.find(DetalleFactura.class, codigoDetalle);
+            if (detalle == null) {
                 System.out.println("Detalle no encontrado.");
             } else {
-                Object[] detalle = result.get(0);
-                System.out.println("Código Detalle: " + detalle[0] + ", Factura: " + detalle[1] + ", Tipo: " + detalle[2] + ", Gasto: " + detalle[3] + ", Cantidad: " + detalle[4]);
+                System.out.println(detalle);
             }
         } finally {
             em.close();
         }
     }
 
+    // Editar un Detalle
     public static void editarDetalleFactura() {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -119,7 +120,8 @@ public class DetalleFacturaController {
         int codigoFactura = leer.nextInt();
         leer.nextLine();
         System.out.print("Nuevo tipo de gasto (Servicio/Reparacion/Llanta/Repuesto/Accesorio): ");
-        String tipoGasto = leer.nextLine();
+        String tipoGastoStr = leer.nextLine();
+        DetalleFactura.TipoGasto tipoGasto = DetalleFactura.TipoGasto.valueOf(tipoGastoStr);
         System.out.print("Nuevo código de gasto: ");
         int codigoGasto = leer.nextInt();
         System.out.print("Nueva cantidad: ");
@@ -127,15 +129,18 @@ public class DetalleFacturaController {
 
         try {
             tx.begin();
-            Query query = em.createNativeQuery("CALL sp_EditarDetalleFactura(?, ?, ?, ?, ?)");
-            query.setParameter(1, codigoDetalle);
-            query.setParameter(2, codigoFactura);
-            query.setParameter(3, tipoGasto);
-            query.setParameter(4, codigoGasto);
-            query.setParameter(5, cantidad);
-            query.executeUpdate();
-            tx.commit();
-            System.out.println("Detalle de factura editado correctamente.");
+            DetalleFactura detalle = em.find(DetalleFactura.class, codigoDetalle);
+            if (detalle != null) {
+                detalle.setCodigoFactura(codigoFactura);
+                detalle.setTipoGasto(tipoGasto);
+                detalle.setCodigoGasto(codigoGasto);
+                detalle.setCantidad(cantidad);
+                em.merge(detalle); // Editar el detalle
+                tx.commit();
+                System.out.println("Detalle de factura editado correctamente.");
+            } else {
+                System.out.println("Detalle no encontrado.");
+            }
         } catch (Exception e) {
             tx.rollback();
             System.err.println("Error al editar detalle: " + e.getMessage());
@@ -144,20 +149,24 @@ public class DetalleFacturaController {
         }
     }
 
+    // Eliminar un Detalle
     public static void eliminarDetalleFactura() {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
-        System.out.print("Ingrese el código de la factura asociada al detalle a eliminar: ");
-        int codigoFactura = leer.nextInt();
+        System.out.print("Ingrese el código del detalle a eliminar: ");
+        int codigoDetalle = leer.nextInt();
 
         try {
             tx.begin();
-            Query query = em.createNativeQuery("CALL sp_EliminarDetalleFactura(?)");
-            query.setParameter(1, codigoFactura);
-            query.executeUpdate();
-            tx.commit();
-            System.out.println("Detalle eliminado correctamente.");
+            DetalleFactura detalle = em.find(DetalleFactura.class, codigoDetalle);
+            if (detalle != null) {
+                em.remove(detalle); // Eliminar el detalle
+                tx.commit();
+                System.out.println("Detalle eliminado correctamente.");
+            } else {
+                System.out.println("Detalle no encontrado.");
+            }
         } catch (Exception e) {
             tx.rollback();
             System.err.println("Error al eliminar detalle: " + e.getMessage());

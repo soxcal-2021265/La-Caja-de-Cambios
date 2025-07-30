@@ -1,10 +1,26 @@
 package com.oscarcumatz.dominio;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table (name="DetalleFactura")
 public class DetalleFactura {
+    @Id
+    @Column (name="codigoDetalle")
     private int codigoDetalle;
+    @Column
     private int codigoFactura;
+    @Enumerated(EnumType.STRING)
+    @Column(name ="TipoGasto")
     private TipoGasto tipoGasto;
+    @Column
     private int codigoGasto;
+    @Column
     private int cantidad;
     
     public DetalleFactura(){        
