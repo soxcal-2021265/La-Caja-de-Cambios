@@ -1,4 +1,3 @@
-
 package com.oscarcumatz.dominio;
 
 import javax.persistence.Column;
@@ -21,6 +20,8 @@ public class Cliente {
     private String correoCliente;
     @Column
     private String direccion;
+    @Column
+    private String contrasena;
     
     public Cliente(){
         
@@ -65,10 +66,19 @@ public class Cliente {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+    
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
 
     @Override
     public String toString() {
-        return "Cliente{" + "codigoCliente=" + codigoCliente + ", nombreCliente=" + nombreCliente + ", telefonoCliente=" + telefonoCliente + ", correoCliente=" + correoCliente + ", direccion=" + direccion + '}';
+        return "Cliente{" + "codigoCliente=" + codigoCliente + ", nombreCliente=" + nombreCliente + ", telefonoCliente=" + telefonoCliente + ", correoCliente=" + correoCliente + ", direccion=" + direccion + ", contrasena=" + contrasena + '}';
     }
+
     
 }

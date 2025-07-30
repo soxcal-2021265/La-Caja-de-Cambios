@@ -31,7 +31,7 @@ public class ClienteController {
                 case 4: editarCliente(); break;
                 case 5: eliminarCliente(); break;
                 case 6: System.out.println("Regresando al menú principal..."); break;
-                default: System.out.println("******* Opción no válida *******"); break;
+                default: System.out.println("*** Opción no válida ***"); break;
             }
  
         } while (opcion != 6);
@@ -49,6 +49,8 @@ public class ClienteController {
         String correo = leer.nextLine();
         System.out.print("Dirección: ");
         String direccion = leer.nextLine();
+        System.out.print("Contraseña: ");
+        String contrasena = leer.nextLine();
  
         try {
             tx.begin();
@@ -57,6 +59,7 @@ public class ClienteController {
             query.setParameter(2, telefono);
             query.setParameter(3, correo);
             query.setParameter(4, direccion);
+            query.setParameter(5, contrasena);
             query.executeUpdate();
             tx.commit();
             System.out.println("Cliente agregado correctamente.");
@@ -72,10 +75,10 @@ public class ClienteController {
         EntityManager em = emf.createEntityManager();
         try {
             List<Object[]> clientes = em.createNativeQuery("CALL sp_ListarCliente()").getResultList();
-            System.out.println("\n*** Lista de Clientes ***");
+            System.out.println("\n** Lista de Clientes **");
             for (Object[] cliente : clientes) {
                 System.out.println("Código: " + cliente[0] + ", Nombre: " + cliente[1] + ", Teléfono: " + cliente[2] +
-                        ", Correo: " + cliente[3] + ", Dirección: " + cliente[4]);
+                        ", Correo: " + cliente[3] + ", Dirección: " + cliente[4] + ", Contrasena: " + cliente[5]);
             }
         } finally {
             em.close();
@@ -96,7 +99,7 @@ public class ClienteController {
             } else {
                 Object[] cliente = result.get(0);
                 System.out.println("Código: " + cliente[0] + ", Nombre: " + cliente[1] + ", Teléfono: " + cliente[2] +
-                        ", Correo: " + cliente[3] + ", Dirección: " + cliente[4]);
+                        ", Correo: " + cliente[3] + ", Dirección: " + cliente[4] + ", Contrasena: " + cliente[5]);
             }
         } finally {
             em.close();
@@ -118,6 +121,8 @@ public class ClienteController {
         String correo = leer.nextLine();
         System.out.print("Nueva dirección: ");
         String direccion = leer.nextLine();
+        System.out.print("Nueva contraseña: ");
+        String contrasena = leer.nextLine();
  
         try {
             tx.begin();
@@ -127,6 +132,7 @@ public class ClienteController {
             query.setParameter(3, telefono);
             query.setParameter(4, correo);
             query.setParameter(5, direccion);
+            query.setParameter(6, contrasena);
             query.executeUpdate();
             tx.commit();
             System.out.println("Cliente editado correctamente.");
